@@ -65,7 +65,7 @@ define(function (require) {
                 
                 var orderId = $scope.orders[0];
 
-                var obj = { applicationName: '292_PrintStockItemLabel', macroName: '292_PrintStockItemLabel', orderId: orderId };
+                var obj = { applicationName: 'TEST_292_PrintStockItemLabel', macroName: 'TEST_292_PrintLableMacro', orderId: orderId };
 
                 // RUN Macro to get necessary data
                 macroService.Run(obj, function (data) {
@@ -80,4 +80,12 @@ define(function (require) {
     };
 
     placeholderManager.register("OpenOrders_ProcessOrders_RightBottomButtons", placeHolder);
+
+    $(this).ready(function($scope){
+      console.log("this");
+    });
+  
+    $(dialog).ready(function($scope) {
+      console.log("dialog");
+    });
 });
