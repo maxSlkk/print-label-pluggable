@@ -71,6 +71,7 @@ define(function (require) {
                 macroService.Run(obj, function (data) {
                     if ((data.result.IsError == false)) {
                         var res = data.result;
+                        alert(res.PdfURL);
                     } else {
                         alert(data.result.ErrorString);
                     }
