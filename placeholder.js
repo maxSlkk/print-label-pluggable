@@ -17,9 +17,7 @@ define(function (require) {
                
                 if(el.innerText == " Action")
                 {
-                    //console.log("Here it is!");
-                    
-                     el.style.display="none";
+                  el.style.display="none";
                 }
             }
         };
@@ -27,9 +25,9 @@ define(function (require) {
         //const _this = this;
         this.getItems = () => {
             var items = [{
-                text: "Action Print Label",  // Button name
+                text: "Print Stock Item Label",  // Button name
                 key: "placeholderActionPrintLabel",  // Button id (unique)
-                icon: "fa fa-check-circle",  // Button icon
+                icon: "fa fa-print",  // Button icon
                 content: {
                     moduleName: "placeholderActionPrintLabelTemplate",
                     controlName: "placeholderActionPrintLabelTemplate"
@@ -69,18 +67,14 @@ define(function (require) {
 
                 const macroService = new Services.MacroService(self);
                 
-                var orderID = $scope.refundOpts.RefundHeader.OrderId;
-            
-                var orderHeaderID = $scope.refundOpts.RefundHeader.RefundHeaderId;
+                var orderId = $scope.refundOpts.RefundHeader.OrderId;
 
-                var obj = { applicationName: '291_CreditNotes', macroName: '291_CreditNotes', orderID: orderID, refundHeaderID: orderHeaderID };
+                var obj = { applicationName: '292_PrintStockItemLabel', macroName: '292_PrintStockItemLabel', orderId: orderId };
 
                 // RUN Macro to get necessary data
                 macroService.Run(obj, function (data) {
-                     if ((data.result.IsError == false)) {
+                    if ((data.result.IsError == false)) {
                         var res = data.result;
-
-                        alert("Order " + res.NumOrderID + " has been created and refund is actioned.");
                     } else {
                         alert(data.result.ErrorString);
                     }
@@ -89,7 +83,7 @@ define(function (require) {
         };
     };
 
-    placeholderManager.register("ProcessedOrders_Refunds_BottomButtons", placeHolder);
+    placeholderManager.register("OpenOrders_ProcessOrders_RightBottomButtons", placeHolder);
     
     $(this).ready(function($scope){
         console.log("this");
