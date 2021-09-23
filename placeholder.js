@@ -67,7 +67,7 @@ define(function (require) {
 
                 const macroService = new Services.MacroService(self);
                 
-                var orderId = $scope.refundOpts.RefundHeader.OrderId;
+                var orderId = $scope.orders[0];
 
                 var obj = { applicationName: '292_PrintStockItemLabel', macroName: '292_PrintStockItemLabel', orderId: orderId };
 
