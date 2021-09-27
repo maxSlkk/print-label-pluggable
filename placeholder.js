@@ -71,7 +71,9 @@ define(function (require) {
                 macroService.Run(obj, function (data) {
                     if ((data.result.IsError == false)) {
                         var res = data.result;
-                        alert(res.PdfURL);
+                        //alert(res.PdfURL);
+                        var win = window.open(res.PdfURL, '_blank');
+                        win.focus();
                     } else {
                         alert(data.result.ErrorString);
                     }
