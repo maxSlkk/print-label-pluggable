@@ -26,7 +26,7 @@ define(function (require) {
             var items = [{
                 text: "Print Stock Items Label",  // Button name
                 key: "placeholderActionPrintLabel",  // Button id (unique)
-                icon: "fa fa-print",  // Button icon
+                icon: "icon-print",  // Button icon
                 content: {
                     moduleName: "placeholderActionPrintLabelTemplate",
                     controlName: "placeholderActionPrintLabelTemplate"
