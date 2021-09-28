@@ -11,6 +11,6 @@
   height: 100%;
 }
 
-::ng-deep .content{
-  padding: 0px;
+::ng-deep .lwDialog .dialog .window>.content{
+  padding: 0px !important;
 }
