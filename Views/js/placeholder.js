@@ -75,9 +75,6 @@ define(function (require) {
                         // var win = window.open(res.PdfURL, '_blank');
                         // win.focus();
 
-                        // $.getscript("PrintDialog.js",function(){
-                        //   PrintDialogView($scope, $element);
-                        //   });
                         const wind = require('core/Window');
 
                         var printWindow = new wind({
@@ -87,7 +84,7 @@ define(function (require) {
                             "Print Stock Items Label ",
                           closeOnEscape: false,
                           closeOnBackDrop: false,
-                          data: {test:"hello"},
+                          data: { URL: res.PdfURL },
                           width: "764px",
                           height: "900px",
                           ngScope: $scope,
