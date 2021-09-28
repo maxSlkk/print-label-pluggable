@@ -10,3 +10,7 @@
   overflow: hidden;
   height: 100%;
 }
+
+::ng-deep .content{
+  padding: 0px;
+}
