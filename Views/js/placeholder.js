@@ -25,7 +25,7 @@ define(function (require) {
         this.getItems = () => {
             var items = [{
                 text: "Print Stock Items Label",  // Button name
-                key: "placeholderActionPrintLabel",  // Button id (unique)
+                key: "PrintStockItemsLabel",  // Button id (unique)
                 icon: "icon-print",  // Button icon
                 content: {
                     moduleName: "PrintStockItemsLabel",
