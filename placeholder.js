@@ -72,8 +72,26 @@ define(function (require) {
                     if ((data.result.IsError == false)) {
                         var res = data.result;
                         //alert(res.PdfURL);
-                        var win = window.open(res.PdfURL, '_blank');
-                        win.focus();
+                        // var win = window.open(res.PdfURL, '_blank');
+                        // win.focus();
+
+                        $.getscript("PrintDialog.js",function(){
+                          PrintDialogView($scope, $element);
+                          });
+                        // var printWindow = new wind({
+                        //   moduleName: "PayWithPayoneer",
+                        //   windowName: "PayWithPayoneer",
+                        //   title:
+                        //     "Payoneer - Pay Purchase Order " +
+                        //     $scope.$parent.purchaseOrder.ExternalInvoiceNumber,
+                        //   closeOnEscape: false,
+                        //   closeOnBackDrop: false,
+                        //   data: {},
+                        //   width: "764px",
+                        //   height: "900px",
+                        //   ngScope: $scope,
+                        // });
+                        // printWindow.open();
                     } else {
                         alert(data.result.ErrorString);
                     }
