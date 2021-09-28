@@ -5,8 +5,12 @@
   height: 100%;
 }
 
-.iframe-container-custom .window .content{
-  padding: 0px !important;
+/* .iframe-container{
+  padding: 0px;
   overflow: hidden;
   height: 100%;
+} */
+
+.iframe-container .window .content{
+  padding: 0px !important;
 }
