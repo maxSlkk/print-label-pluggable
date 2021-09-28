@@ -1,5 +1,6 @@
 var PrintStockItemsLabelView = function ($scope, $element, $filter, $compile, $q, $http) {
   var self = this;
+  alert("hello");
   $scope.purchaseId = $scope.$parent.$parent.$parent.purchaseOrder.pkPurchaseID;
   $scope.purchaseNumber = $scope.$parent.$parent.$parent.purchaseOrder.ExternalInvoiceNumber;
   $scope.purchaseAmount = $scope.$parent.$parent.$parent.purchaseOrder.ConvertedGrandTotal;
