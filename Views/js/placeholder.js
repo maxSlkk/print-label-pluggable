@@ -28,8 +28,8 @@ define(function (require) {
                 key: "placeholderActionPrintLabel",  // Button id (unique)
                 icon: "icon-print",  // Button icon
                 content: {
-                    moduleName: "placeholderActionPrintLabelTemplate",
-                    controlName: "placeholderActionPrintLabelTemplate"
+                    moduleName: "PrintStockItemsLabel",
+                    controlName: "PrintStockItemsLabel"
                 }
             }];
 
@@ -75,23 +75,24 @@ define(function (require) {
                         // var win = window.open(res.PdfURL, '_blank');
                         // win.focus();
 
-                        $.getscript("PrintDialog.js",function(){
-                          PrintDialogView($scope, $element);
-                          });
-                        // var printWindow = new wind({
-                        //   moduleName: "PayWithPayoneer",
-                        //   windowName: "PayWithPayoneer",
-                        //   title:
-                        //     "Payoneer - Pay Purchase Order " +
-                        //     $scope.$parent.purchaseOrder.ExternalInvoiceNumber,
-                        //   closeOnEscape: false,
-                        //   closeOnBackDrop: false,
-                        //   data: {},
-                        //   width: "764px",
-                        //   height: "900px",
-                        //   ngScope: $scope,
-                        // });
-                        // printWindow.open();
+                        // $.getscript("PrintDialog.js",function(){
+                        //   PrintDialogView($scope, $element);
+                        //   });
+                        const wind = require('core/Window');
+
+                        var printWindow = new wind({
+                          moduleName: "PrintStockItemsLabel",
+                          windowName: "PrintStockItemsLabel",
+                          title:
+                            "Print Stock Items Label ",
+                          closeOnEscape: false,
+                          closeOnBackDrop: false,
+                          data: {test:"hello"},
+                          width: "764px",
+                          height: "900px",
+                          ngScope: $scope,
+                        });
+                        printWindow.open();
                     } else {
                         alert(data.result.ErrorString);
                     }
