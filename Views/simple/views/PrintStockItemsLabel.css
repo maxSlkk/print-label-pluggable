@@ -5,17 +5,8 @@
   height: 100%;
 }
 
-.iframe-container-custom{
-  padding: 0px;
-  overflow: hidden;
-  height: 100%;
-}
-
-
 .iframe-container-custom .window .content{
   padding: 0px !important;
-}
-
-::ng-deep .iframe-container-custom .window .content{
-  padding: 100px ;
+  overflow: hidden;
+  height: 100%;
 }
