@@ -53,6 +53,10 @@ define(function (require) {
             return true;
         };
 
+        const wind = require('core/Window');
+        var iframeCounter = 0;
+        var macroResult;
+
         this.onClick = () => {
           
             let isExecuted = confirm("Are you sure to execute this action?");
@@ -70,51 +74,55 @@ define(function (require) {
                 // RUN Macro to get necessary data
                 macroService.Run(obj, function (data) {
                     if ((data.result.IsError == false)) {
-                        var res = data.result;
-
-                        for (let i = 0; i < res.PdfURLs.length; i++) {
-                            const wind = require('core/Window');
-
-                            var printWindow = new wind({
-                                moduleName: "PrintStockItemsLabel",
-                                windowName: "PrintStockItemsLabel",
-                                title: "Print Stock Item Label " + res.PdfURLs[i].Value,
-                                closeOnEscape: false,
-                                closeOnBackDrop: false,
-                                data: { URL: res.PdfURLs[i].Key, IframeNumber: i + 1 },
-                                width: "764px",
-                                height: "900px",
-                                onWindowClosed: function (event) {
-                                    switch (event.action) {
-                                        case "OK":
-                                            alert('ok');
-                                            $scope.CheckHasChanged();
-                                            if (!$scope.$$phase) {
-                                                $scope.$apply();
-                                            }
-                                            break;
-                                        case "CLOSE":
-                                            alert('close');
-                                            if (event.result) {
-                                                $scope.CheckHasChanged();
-                                                if (!$scope.$$phase) {
-                                                    $scope.$apply();
-                                                }
-                                            }
-                                            break;
-                                    }
-                                },
-                                ngScope: $scope
-                            });
-
-                            printWindow.open();
-                        }
+                        macroResult = data.result;
+                        var printWindow = createWindow();
+                        printWindow.open();
                     } else {
                         alert(data.result.ErrorString);
                     }
                 });
             }
         };
+
+        function createWindow(){
+            var window = new wind({
+                moduleName: "PrintStockItemsLabel",
+                windowName: "PrintStockItemsLabel",
+                title: "Print Stock Item Label " + macroResult.PdfURLs[iframeCounter].Value,
+                closeOnEscape: false,
+                closeOnBackDrop: false,
+                data: { URL: macroResult.PdfURLs[iframeCounter].Key, IframeNumber: iframeCounter },
+                width: "764px",
+                height: "900px",
+                onWindowClosed: function (event) {
+                    switch (event.action) {
+                        case "OK":
+                            $scope.CheckHasChanged();
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                            break;
+                        case "CLOSE":
+                            if(iframeCounter < macroResult.PdfURLs.length){
+                                var printWindow = createWindow()
+                                printWindow.open();
+                            }
+                            if (event.result) {
+                                $scope.CheckHasChanged();
+                                if (!$scope.$$phase) {
+                                    $scope.$apply();
+                                }
+                            }
+                            break;
+                    }
+                },
+                ngScope: $scope
+            });
+    
+            iframeCounter++;
+            
+            return window;
+        }
     };
 
     placeholderManager.register("OpenOrders_ProcessOrders_RightBottomButtons", placeHolder);
