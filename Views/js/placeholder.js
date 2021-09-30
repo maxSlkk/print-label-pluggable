@@ -107,6 +107,9 @@ define(function (require) {
                                 var printWindow = createWindow()
                                 printWindow.open();
                             }
+                            else{
+                                iframeCounter = 0;
+                            }
                             if (event.result) {
                                 $scope.CheckHasChanged();
                                 if (!$scope.$$phase) {
