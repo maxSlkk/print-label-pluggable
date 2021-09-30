@@ -71,9 +71,13 @@ define(function (require) {
 
                 var obj = { applicationName: 'TEST_292_PrintStockItemLabel', macroName: 'TEST_292_PrintLableMacro', orderId: orderId };
 
+                const busyWorker = require("core/busyWorker/busyWorker");
+                busyWorker.showBusy("Updating");
+                
                 // RUN Macro to get necessary data
                 macroService.Run(obj, function (data) {
                     if ((data.result.IsError == false)) {
+                        busyWorker.hideBusy();
                         macroResult = data.result;
                         var printWindow = createWindow();
                         printWindow.open();
@@ -91,7 +95,7 @@ define(function (require) {
                 title: "Print Stock Item Label " + macroResult.PdfURLs[iframeCounter].Value,
                 closeOnEscape: false,
                 closeOnBackDrop: false,
-                data: { URL: macroResult.PdfURLs[iframeCounter].Key, IframeNumber: iframeCounter },
+                data: { URL: macroResult.PdfURLs[iframeCounter].Key },
                 width: "764px",
                 height: "900px",
                 onWindowClosed: function (event) {
@@ -109,6 +113,7 @@ define(function (require) {
                             }
                             else{
                                 iframeCounter = 0;
+                                macroResult = null;
                             }
                             if (event.result) {
                                 $scope.CheckHasChanged();
