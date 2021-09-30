@@ -70,14 +70,10 @@ define(function (require) {
                 var orderId = $scope.orders[0];
 
                 var obj = { applicationName: 'TEST_292_PrintStockItemLabel', macroName: 'TEST_292_PrintLableMacro', orderId: orderId };
-
-                const busyWorker = require("core/busyWorker/busyWorker");
-                busyWorker.showBusy("Updating");
                 
                 // RUN Macro to get necessary data
                 macroService.Run(obj, function (data) {
                     if ((data.result.IsError == false)) {
-                        busyWorker.hideBusy();
                         macroResult = data.result;
                         var printWindow = createWindow();
                         printWindow.open();
