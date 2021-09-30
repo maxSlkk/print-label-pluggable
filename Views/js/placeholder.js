@@ -81,9 +81,29 @@ define(function (require) {
                                 title: "Print Stock Item Label " + res.PdfURLs[i].Value,
                                 closeOnEscape: false,
                                 closeOnBackDrop: false,
-                                data: { URL: res.PdfURLs[i].Key },
+                                data: { URL: res.PdfURLs[i].Key, IframeNumber: i + 1 },
                                 width: "764px",
                                 height: "900px",
+                                onWindowClosed: function (event) {
+                                    switch (event.action) {
+                                        case "OK":
+                                            alert('ok');
+                                            $scope.CheckHasChanged();
+                                            if (!$scope.$$phase) {
+                                                $scope.$apply();
+                                            }
+                                            break;
+                                        case "CLOSE":
+                                            alert('close');
+                                            if (event.result) {
+                                                $scope.CheckHasChanged();
+                                                if (!$scope.$$phase) {
+                                                    $scope.$apply();
+                                                }
+                                            }
+                                            break;
+                                    }
+                                },
                                 ngScope: $scope
                             });
 
