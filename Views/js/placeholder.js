@@ -71,25 +71,24 @@ define(function (require) {
                 macroService.Run(obj, function (data) {
                     if ((data.result.IsError == false)) {
                         var res = data.result;
-                        //alert(res.PdfURL);
-                        // var win = window.open(res.PdfURL, '_blank');
-                        // win.focus();
 
-                        const wind = require('core/Window');
+                        for (let i = 0; i < res.PdfURLs.length; i++) {
+                            const wind = require('core/Window');
 
-                        var printWindow = new wind({
-                          moduleName: "PrintStockItemsLabel",
-                          windowName: "PrintStockItemsLabel",
-                          title:
-                            "Print Stock Items Label ",
-                          closeOnEscape: false,
-                          closeOnBackDrop: false,
-                          data: { URL: res.PdfURL },
-                          width: "764px",
-                          height: "900px",
-                          ngScope: $scope,
-                        });
-                        printWindow.open();
+                            var printWindow = new wind({
+                                moduleName: "PrintStockItemsLabel",
+                                windowName: "PrintStockItemsLabel",
+                                title: "Print Stock Item Label " + res.PdfURLs[i].Value,
+                                closeOnEscape: false,
+                                closeOnBackDrop: false,
+                                data: { URL: res.PdfURLs[i].Key },
+                                width: "764px",
+                                height: "900px",
+                                ngScope: $scope
+                            });
+
+                            printWindow.open();
+                        }
                     } else {
                         alert(data.result.ErrorString);
                     }
