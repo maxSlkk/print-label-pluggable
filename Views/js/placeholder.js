@@ -3,9 +3,7 @@
 define(function (require) {
     const placeholderManager = require("core/placeholderManager");
 
-    var docDefinition;
-
-    var placeHolder = function ($scope, $element, controlService) {
+    var placeHolder = function ($scope, $element) {
         
         this.onLoad = () => {
             var btns = $element[0].children[0].children[3].children;
@@ -21,7 +19,6 @@ define(function (require) {
             }
         };
         
-        //const _this = this;
         this.getItems = () => {
             var items = [{
                 text: "Print Stock Items Label",  // Button name
@@ -103,11 +100,11 @@ define(function (require) {
                             }
                             break;
                         case "CLOSE":
-                            if(iframeCounter < macroResult.PdfURLs.length){
-                                var printWindow = createWindow()
+                            if (iframeCounter < macroResult.PdfURLs.length) {
+                                var printWindow = createWindow();
                                 printWindow.open();
                             }
-                            else{
+                            else {
                                 iframeCounter = 0;
                                 macroResult = null;
                             }
