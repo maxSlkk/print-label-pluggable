@@ -5,20 +5,6 @@ define(function (require) {
 
     var placeHolder = function ($scope, $element) {
         
-        this.onLoad = () => {
-            var btns = $element[0].children[0].children[3].children;
-                        
-            for (var i = 0; i < btns.length; i++) 
-            {
-                var el = btns[i];
-               
-                if(el.innerText == " Action")
-                {
-                  el.style.display="none";
-                }
-            }
-        };
-        
         this.getItems = () => {
             var items = [{
                 text: "Print Stock Items Label",  // Button name
@@ -31,23 +17,6 @@ define(function (require) {
             }];
 
             return items;
-        };
-
-        this.isEnabled = (itemKey) => {
-            
-             var btns = $element[0].children[0].children[3].children;
-                        
-            for (var i = 0; i < btns.length; i++) 
-            {
-                var el = btns[i];
-               
-                if(el.innerText == " Action")
-                {
-                     el.style.display="none";
-                }
-            }
-            
-            return true;
         };
 
         const wind = require('core/Window');
