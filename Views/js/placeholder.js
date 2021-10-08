@@ -19,35 +19,37 @@ define(function (require) {
             return items;
         };
 
+        this.isEnabled = (itemKey) => {            
+            return true;
+        };
+
         const wind = require('core/Window');
         var iframeCounter = 0;
         var macroResult;
 
         this.onClick = () => {
-          
-            let isExecuted = confirm("Are you sure to execute this action?");
-            
-            if(isExecuted)
-            {
-                const self = this;
+          const self = this;
 
-                const macroService = new Services.MacroService(self);
-                
-                var orderId = $scope.orders[0];
+          const macroService = new Services.MacroService(self);
 
-                var obj = { applicationName: 'TEST_292_PrintStockItemLabel', macroName: 'TEST_292_PrintLableMacro', orderId: orderId };
-                
-                // RUN Macro to get necessary data
-                macroService.Run(obj, function (data) {
-                    if ((data.result.IsError == false)) {
-                        macroResult = data.result;
-                        var printWindow = createWindow();
-                        printWindow.open();
-                    } else {
-                        alert(data.result.ErrorString);
-                    }
-                });
+          var orderId = $scope.orders[0];
+
+          var obj = {
+            applicationName: "TEST_292_PrintStockItemLabel",
+            macroName: "TEST_292_PrintLableMacro",
+            orderId: orderId,
+          };
+
+          // RUN Macro to get necessary data
+          macroService.Run(obj, function (data) {
+            if (data.result.IsError == false) {
+              macroResult = data.result;
+              var printWindow = createWindow();
+              printWindow.open();
+            } else {
+              alert(data.result.ErrorString);
             }
+          });
         };
 
         function createWindow(){
