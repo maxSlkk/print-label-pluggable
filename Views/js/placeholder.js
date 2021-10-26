@@ -54,8 +54,8 @@ define(function (require) {
 
         function createWindow(){
             var window = new wind({
-                moduleName: "PrintStockItemsLabel",
-                windowName: "PrintStockItemsLabel",
+                moduleName: "PrintStockItemLabels",
+                windowName: "PrintStockItemLabels",
                 title: "Print Stock Item Label " + macroResult.PdfURLs[iframeCounter].Value,
                 closeOnEscape: false,
                 closeOnBackDrop: false,
