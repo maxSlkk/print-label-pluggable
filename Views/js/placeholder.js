@@ -8,11 +8,11 @@ define(function (require) {
         this.getItems = () => {
             var items = [{
                 text: "Print Stock Item Labels",  // Button name
-                key: "PrintStockItemsLabel",  // Button id (unique)
+                key: "PrintStockItemLabels",  // Button id (unique)
                 icon: "icon-print",  // Button icon
                 content: {
-                    moduleName: "PrintStockItemsLabel",
-                    controlName: "PrintStockItemsLabel"
+                    moduleName: "PrintStockItemLabels",
+                    controlName: "PrintStockItemLabels"
                 }
             }];
 
