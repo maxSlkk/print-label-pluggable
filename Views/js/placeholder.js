@@ -7,7 +7,7 @@ define(function (require) {
         
         this.getItems = () => {
             var items = [{
-                text: "Print Stock Items Label",  // Button name
+                text: "Print Stock Item Labels",  // Button name
                 key: "PrintStockItemsLabel",  // Button id (unique)
                 icon: "icon-print",  // Button icon
                 content: {
@@ -35,8 +35,8 @@ define(function (require) {
           var orderId = $scope.orders[0];
 
           var obj = {
-            applicationName: "TEST_292_PrintStockItemLabel",
-            macroName: "TEST_292_PrintLableMacro",
+            applicationName: "Print Stock Item Labels",
+            macroName: "PrintStockItemLabels",
             orderId: orderId,
           };
 
