@@ -1,4 +1,4 @@
-var PrintStockItemsLabelView = function ($scope) {
+var PrintStockItemLabelsView = function ($scope) {
   let urlString = $scope._moduleInstance.options.data.URL;
   let iframe = document.getElementById("stockItemLabelFrame");
   
