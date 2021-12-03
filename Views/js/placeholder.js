@@ -35,9 +35,19 @@ define(function (require) {
           var orderId = $scope.orders[0];
 
           var obj = {
-            applicationName: "Print Stock Item Labels",
-            macroName: "PrintStockItemLabels",
-            orderId: orderId,
+            Parameters:[
+                {MacroId:181,ParameterName:"Address2",ParameterValue:false},
+                {MacroId:181,ParameterName:"Address3",ParameterValue:false},
+                {MacroId:181,ParameterName:"Country",ParameterValue:false},
+                {MacroId:181,ParameterName:"Currency",ParameterValue:false},
+                {MacroId:181,ParameterName:"FolderName",ParameterValue:"TestFromPlaceholder"},
+                {MacroId:181,ParameterName:"FullName",ParameterValue:false},
+                {MacroId:181,ParameterName:"PostalService",ParameterValue:true},
+                {MacroId:181,ParameterName:"Region",ParameterValue:false},
+                {MacroId:181,ParameterName:"Source",ParameterValue:false},
+                {MacroId:181,ParameterName:"SubSource",ParameterValue:false},
+                {MacroId:181,ParameterName:"Town",ParameterValue:false}
+            ]
           };
 
           // RUN Macro to get necessary data
