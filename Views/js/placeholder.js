@@ -60,7 +60,7 @@ define(function (require) {
         //       alert(data.result.ErrorString);
         //     }
         //   });
-        macroService.UpdateMacroParameters(obj, function(){console.log("update macro parameters");});
+        macroService.UpdateMacroParameters(obj, function(data){console.log(data);});
           
         };
 
