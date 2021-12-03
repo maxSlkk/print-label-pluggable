@@ -41,15 +41,17 @@ define(function (require) {
           };
 
           // RUN Macro to get necessary data
-          macroService.Run(obj, function (data) {
-            if (data.result.IsError == false) {
-              macroResult = data.result;
-              var printWindow = createWindow();
-              printWindow.open();
-            } else {
-              alert(data.result.ErrorString);
-            }
-          });
+        //   macroService.Run(obj, function (data) {
+        //     if (data.result.IsError == false) {
+        //       macroResult = data.result;
+        //       var printWindow = createWindow();
+        //       printWindow.open();
+        //     } else {
+        //       alert(data.result.ErrorString);
+        //     }
+        //   });
+        macroService.UpdateMacroParameters(obj, function(){console.log("update macro parameters");});
+          
         };
 
         function createWindow(){
