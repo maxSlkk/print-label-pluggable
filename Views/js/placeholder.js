@@ -122,8 +122,8 @@ define(function (require) {
         var inputs = resendForm.getElementsByTagName("input");
         if (inputs) {
           for (var input of inputs) {
-            if (input.getAttribute("lw-tst").includes("additionalCost")) {
-              //input.parentElement.parentElement.parentElement.innerHTML = "";
+            if (input.getAttribute("lw-tst") = "input_additionalCost") {
+              input.parentElement.parentElement.innerHTML = "";
             }
           }
         }
