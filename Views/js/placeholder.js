@@ -123,7 +123,7 @@ define(function (require) {
         if (inputs) {
           for (var input of inputs) {
             if (input.getAttribute("lw-tst").includes("additionalCost")) {
-              input.parentElement.parentElement.parentElement.parentElement.innerHTML = "";
+              input.parentElement.parentElement.parentElement.innerHTML = "";
             }
           }
         }
