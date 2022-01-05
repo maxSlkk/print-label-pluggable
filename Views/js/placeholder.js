@@ -135,8 +135,19 @@ define(function (require) {
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
 
     setTimeout(function () {
+      const userPermissions = getUserPermissions(session.userName, session.token);
+      console.log(userPermissions);
       const targetNode = document.getElementsByClassName("legacy-windows-container")[0];
       observer.observe(targetNode, config);
     }, 2000);
   });
+
+  function getUserPermissions(userEmail, token)
+  {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.setRequestHeader('Authorization', token);
+    xmlHttp.open("GET", "?userEmail="+userEmail, false);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+  }
 });
