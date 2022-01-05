@@ -146,7 +146,7 @@ define(function (require) {
   {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.setRequestHeader('Authorization', token);
-    xmlHttp.open("GET", "?userEmail="+userEmail, false);
+    xmlHttp.open("GET", "https://localhost:44396/api/getUserConfiguration?userEmail="+userEmail, false);
     xmlHttp.send(null);
     return xmlHttp.responseText;
   }
