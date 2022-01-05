@@ -117,28 +117,51 @@ define(function (require) {
     const config = { childList: true, subtree: true };
 
     var callback = function (mutationsList, observer) {
-      var resendForm = document.getElementsByName("submissionForm.Resend")[0];
-      if (resendForm) {
-        var inputs = resendForm.getElementsByTagName("input");
-        if (inputs) {
-          for (var input of inputs) {
-            if (input.getAttribute("lw-tst") == "input_additionalCost") {
-              input.parentElement.parentElement.innerHTML = "";
+
+      if (userPermissions.some(x => x.fieldName === 'input_additionalCost')) {
+        var resendForm = document.getElementsByName("submissionForm.Resend")[0];
+        if (resendForm) {
+          var inputs = resendForm.getElementsByTagName("input");
+          if (inputs) {
+            for (var input of inputs) {
+              if (input.getAttribute("lw-tst") === "input_additionalCost") {
+                input.parentElement.parentElement.innerHTML = "";
+                break;
+              }
             }
           }
         }
       }
+
+      if (userPermissions.some(x => x.fieldName === 'Advanced Permissions')) {
+        var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
+        if (appsContainer) {
+          var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
+          if (moduleContainers) {
+            for (var moduleContainer of moduleContainers) {
+              var nameModule = moduleContainer.getElementsByClassName("module-name-text")[0];
+              if (nameModule) {
+                if (nameModule.getAttribute("title") === "Advanced Allocator") {
+                  moduleContainer.innerHTML = "";
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+
     };
 
     const observer = new MutationObserver(callback);
 
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
 
-    const userPermissions = getUserPermissions(session.userName, session.token);
+    const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
     console.log(userPermissions);
 
     setTimeout(function () {
-      const targetNode = document.getElementsByClassName("legacy-windows-container")[0];
+      const targetNode = document.getElementsByTagName("body")[0];
       observer.observe(targetNode, config);
     }, 2000);
   });
