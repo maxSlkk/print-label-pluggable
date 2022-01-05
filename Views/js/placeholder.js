@@ -137,7 +137,7 @@ define(function (require) {
         var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
         if (appsContainer) {
           var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
-          if (moduleContainers) {
+          if (moduleContainers.length > 0) {
             for (var moduleContainer of moduleContainers) {
               var nameModule = moduleContainer.getElementsByClassName("module-name-text")[0];
               if (nameModule) {
@@ -158,7 +158,6 @@ define(function (require) {
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
 
     const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
-    console.log(userPermissions);
 
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
