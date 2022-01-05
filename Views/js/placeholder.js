@@ -134,9 +134,10 @@ define(function (require) {
 
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
 
+    const userPermissions = getUserPermissions(session.userName, session.token);
+    console.log(userPermissions);
+
     setTimeout(function () {
-      const userPermissions = getUserPermissions(session.userName, session.token);
-      console.log(userPermissions);
       const targetNode = document.getElementsByClassName("legacy-windows-container")[0];
       observer.observe(targetNode, config);
     }, 2000);
