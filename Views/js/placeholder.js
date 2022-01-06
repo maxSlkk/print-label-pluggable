@@ -133,7 +133,7 @@ define(function (require) {
         }
       }
 
-      if (userPermissions.some(x => x.fieldName === 'Advanced Permissions')) {
+      if (userPermissions.some(x => x.fieldName === 'advancedPermissions')) {
         var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
         if (appsContainer) {
           var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
@@ -141,7 +141,7 @@ define(function (require) {
             for (var moduleContainer of moduleContainers) {
               var nameModule = moduleContainer.getElementsByClassName("module-name-text")[0];
               if (nameModule) {
-                if (nameModule.getAttribute("title") === "Advanced Allocator") {
+                if (nameModule.getAttribute("title") === "Custom Permissions Setup") {
                   moduleContainer.innerHTML = "";
                   break;
                 }
@@ -150,7 +150,7 @@ define(function (require) {
           }
         }
       }
-
+      
     };
 
     const observer = new MutationObserver(callback);
@@ -158,6 +158,7 @@ define(function (require) {
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
 
     const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
+    console.log(userPermissions);
 
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
