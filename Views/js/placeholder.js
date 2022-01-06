@@ -169,7 +169,7 @@ define(function (require) {
   function getUserPermissions(userEmail, token)
   {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "https://localhost:44396/api/getUserConfiguration?userEmail="+userEmail, false);
+      xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getUserConfiguration?userEmail="+userEmail, false);
     xmlHttp.setRequestHeader('Authorization', token);
     xmlHttp.send(null);
     return xmlHttp.responseText;
