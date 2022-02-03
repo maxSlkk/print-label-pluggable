@@ -162,18 +162,14 @@ define(function (require) {
         if (returnForm) {
           var selects = returnForm.getElementsByTagName("select");
           if (selects) {
-            var btn = getSubmitButton();
-            //btn.removeAttribute("ng-disabled");
-            //btn.setAttribute("ng-disabled", "!isFormValid()");
-
             for (var select of selects) {
               //making return location select readonly
               if (select.getAttribute("lw-tst") === "select_returnLocation") {
                 select.setAttribute('readonly', true);
               }
               //checking if there is anything selected in category select
-              if (select.getAttribute("lw-tst") === "select_reasonCategory" && btn) {
-                  btn.disabled = (select.value === "?");
+              if (select.getAttribute("lw-tst") === "select_reasonCategory") {
+                input.addEventListener("change", isFormValid);
               }
             }
           }
@@ -184,7 +180,10 @@ define(function (require) {
             for (var input of inputs) {
               if (input.getAttribute("lw-tst") === "input_Refund") {
                 input.setAttribute('readonly', true);
-                break;
+              }
+
+              if (input.getAttribute("lw-tst") === "input_returnQuantity") {
+                input.addEventListener("change", isFormValid);
               }
             }
           }
@@ -210,14 +209,7 @@ define(function (require) {
     };
 
     function isFormValid() {
-        var returnForm = document.getElementsByName("submissionForm.Return")[0];
-        var selects = returnForm.getElementsByTagName("select");
-        if (parseInt(selects[0]) == 4) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        console.log("change");
     }
 
     function getSubmitButton() {
