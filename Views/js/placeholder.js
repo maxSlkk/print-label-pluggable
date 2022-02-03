@@ -125,44 +125,13 @@ define(function (require) {
     var input_returnForm;
     var select_resendForm;
     var input_resendForm;
-
+    console.log("scope");
+    console.log(scope);
+    console.log($scope);
     var callback = function (mutationsList, observer) {
-
-    //   if (userPermissions.some(x => x.fieldName === 'input_additionalCost')) {
-    //     var resendForm = document.getElementsByName("submissionForm.Resend")[0];
-    //     if (resendForm) {
-    //       var inputs = resendForm.getElementsByTagName("input");
-    //       if (inputs) {
-    //         for (var input of inputs) {
-    //           if (input.getAttribute("lw-tst") === "input_additionalCost") {
-    //             input.parentElement.parentElement.innerHTML = "";
-    //             break;
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-
-    //   if (userPermissions.some(x => x.fieldName === 'advancedPermissions')) {
-    //     var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
-    //     if (appsContainer) {
-    //       var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
-    //       if (moduleContainers.length > 0) {
-    //         for (var moduleContainer of moduleContainers) {
-    //           var nameModule = moduleContainer.getElementsByClassName("module-name-text")[0];
-    //           if (nameModule) {
-    //             if (nameModule.getAttribute("title") === "Custom Permissions Setup") {
-    //               moduleContainer.innerHTML = "";
-    //               break;
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-
-        
-        
+        console.log("scope callback");
+        console.log(scope);
+        console.log($scope);
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
             var selects = returnForm.getElementsByTagName("select");
@@ -332,10 +301,9 @@ define(function (require) {
     }, 2000);
   });
 
-  function getUserPermissions(userEmail, token)
-  {
+  function getUserPermissions(userEmail, token) {
     var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getUserConfiguration?userEmail="+userEmail, false);
+    xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getUserConfiguration?userEmail="+userEmail, false);
     xmlHttp.setRequestHeader('Authorization', token);
     xmlHttp.send(null);
     return xmlHttp.responseText;
