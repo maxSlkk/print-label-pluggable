@@ -220,8 +220,24 @@ define(function (require) {
     };
 
     function isFormValid() {
-        console.log(select_validate);
-        console.log(input_validate);
+        console.log("checking");
+        if (!select_validate || !input_validate) {
+            return false;
+        }
+
+        if (select_validate.value === "?") {
+            return false;
+        }
+
+        if (!isNum(input_validate.value) || parseInt(input_validate.value) <= 0 || parseInt(input_validate.value) > 4) {
+            return false;
+        }
+        console.log("enabled");
+        return true;
+    }
+
+    function isNum (str) {
+        return /^\d+$/.test(str);
     }
 
     function getSubmitButton() {
