@@ -218,7 +218,7 @@ define(function (require) {
       
         var resendForm = document.getElementsByName("submissionForm.Resend")[0];
         if (resendForm) {
-            var selects = returnForm.getElementsByTagName("select");
+            var selects = resendForm.getElementsByTagName("select");
             if (selects) {
                 for (var select of selects) {
                     //making return location select readonly
@@ -234,7 +234,7 @@ define(function (require) {
             }
 
             //making refund input readonly
-            var inputs = returnForm.getElementsByTagName("input");
+            var inputs = resendForm.getElementsByTagName("input");
             if (inputs) {
                 for (var input of inputs) {
                     if (input.getAttribute("lw-tst") === "input_Refund") {
