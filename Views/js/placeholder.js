@@ -214,9 +214,9 @@ define(function (require) {
         if (btnsDiv) {
             var buttons = btnsDiv.getElementsByTagName("button");
             if (buttons) {
-                for (var button in buttons) {
-                    if (button.firstChild.nodeValue === "Add Return") {
-                        return button;
+                for (var i = 0; i < buttons.length; i++) {
+                    if (buttons[i].firstChild.nodeValue === "Add Return") {
+                        return buttons[i];
                     }
                 }
             }
