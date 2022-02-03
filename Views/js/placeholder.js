@@ -156,60 +156,70 @@ define(function (require) {
     //     }
     //   }
 
+        var select_validate;
+        var input_validate;
         
-
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
-          var selects = returnForm.getElementsByTagName("select");
-          if (selects) {
-            for (var select of selects) {
-              //making return location select readonly
-              if (select.getAttribute("lw-tst") === "select_returnLocation") {
-                select.setAttribute('readonly', true);
-              }
-              //checking if there is anything selected in category select
-              if (select.getAttribute("lw-tst") === "select_reasonCategory") {
-                select.addEventListener("change", isFormValid);
-              }
+            var selects = returnForm.getElementsByTagName("select");
+            if (selects) {
+                for (var select of selects) {
+                    //making return location select readonly
+                    if (select.getAttribute("lw-tst") === "select_returnLocation") {
+                        select.setAttribute('readonly', true);
+                    }
+                    //checking if there is anything selected in category select
+                    if (select.getAttribute("lw-tst") === "select_reasonCategory") {
+                        select_validate = select;
+                        select.addEventListener("change", isFormValid);
+                    }
+                }
             }
-          }
 
-          //making refund input readonly
-          var inputs = returnForm.getElementsByTagName("input");
-          if (inputs) {
-            for (var input of inputs) {
-              if (input.getAttribute("lw-tst") === "input_Refund") {
-                input.setAttribute('readonly', true);
-              }
+            //making refund input readonly
+            var inputs = returnForm.getElementsByTagName("input");
+            if (inputs) {
+                for (var input of inputs) {
+                    if (input.getAttribute("lw-tst") === "input_Refund") {
+                        input.setAttribute('readonly', true);
+                    }
 
-              if (input.getAttribute("lw-tst") === "input_returnQuantity") {
-                input.addEventListener("change", isFormValid);
-              }
+                    if (input.getAttribute("lw-tst") === "input_returnQuantity") {
+                        input_validate = input;
+                        input.addEventListener("change", isFormValid);
+                    }
+                }
             }
-          }
+
+            //checking if button need to be disabled
+            var btn = getSubmitButton();
+            if (btn) {
+                btn.disabled = !isFormValid();
+            }
         }
 
         //removing exchange tab
         var exchangeForm = document.getElementsByName("submissionForm.Exchange")[0];
         if (exchangeForm) {
-          var lis = exchangeForm.parentElement.parentElement.parentElement.getElementsByTagName("li");
-          if (lis) {
-            for (var li of lis) {
-              if (li.getAttribute("lw-tst") === "tab_Exchange") {
-                //removing tab
-                li.remove();
-                //removing tab content
-                exchangeForm.parentElement.remove();
-                break;
-              }
+            var lis = exchangeForm.parentElement.parentElement.parentElement.getElementsByTagName("li");
+            if (lis) {
+                for (var li of lis) {
+                    if (li.getAttribute("lw-tst") === "tab_Exchange") {
+                        //removing tab
+                        li.remove();
+                        //removing tab content
+                        exchangeForm.parentElement.remove();
+                        break;
+                }
+                }
             }
-          }
         }
       
     };
 
     function isFormValid() {
-        console.log("change");
+        console.log(select_validate);
+        console.log(input_validate);
     }
 
     function getSubmitButton() {
