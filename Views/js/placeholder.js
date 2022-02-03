@@ -121,8 +121,10 @@ define(function (require) {
   $(document).ready(function ($scope) {
     const config = { childList: true, subtree: true };
 
-    var select_validate;
-    var input_validate;
+    var select_returnForm;
+    var input_returnForm;
+    var select_resendForm;
+    var input_resendForm;
 
     var callback = function (mutationsList, observer) {
 
@@ -168,12 +170,12 @@ define(function (require) {
                 for (var select of selects) {
                     //making return location select readonly
                     if (select.getAttribute("lw-tst") === "select_returnLocation") {
-                        select.setAttribute('readonly', true);
+                        select.disabled = true;
                     }
                     //checking if there is anything selected in category select
                     if (select.getAttribute("lw-tst") === "select_reasonCategory") {
-                        select_validate = select;
-                        select.addEventListener("change", isFormValid);
+                        select_returnForm = select;
+                        select.addEventListener("change", isReturnFormValid);
                     }
                 }
             }
@@ -187,17 +189,17 @@ define(function (require) {
                     }
 
                     if (input.getAttribute("lw-tst") === "input_returnQuantity") {
-                        input_validate = input;
-                        input.addEventListener("change", isFormValid);
+                        input_returnForm = input;
+                        input.addEventListener("change", isReturnFormValid);
                     }
                 }
             }
 
             //checking if button need to be disabled
-            isFormValid();
+            isReturnFormValid();
         }
 
-        //removing exchange tab
+        //removing exchange tab and form
         var exchangeForm = document.getElementsByName("submissionForm.Exchange")[0];
         if (exchangeForm) {
             var lis = exchangeForm.parentElement.parentElement.parentElement.getElementsByTagName("li");
@@ -214,30 +216,88 @@ define(function (require) {
             }
         }
       
+        var resendForm = document.getElementsByName("submissionForm.Resend")[0];
+        if (resendForm) {
+            var selects = returnForm.getElementsByTagName("select");
+            if (selects) {
+                for (var select of selects) {
+                    //making return location select readonly
+                    if (select.getAttribute("lw-tst") === "select_RMAOrderLocation") {
+                        select.disabled = true;
+                    }
+                    //checking if there is anything selected in category select
+                    if (select.getAttribute("lw-tst") === "select_reasonCategory") {
+                        select_resendForm = select;
+                        select.addEventListener("change", isResendFormValid);
+                    }
+                }
+            }
+
+            //making refund input readonly
+            var inputs = returnForm.getElementsByTagName("input");
+            if (inputs) {
+                for (var input of inputs) {
+                    if (input.getAttribute("lw-tst") === "input_Refund") {
+                        input.setAttribute('readonly', true);
+                    }
+
+                    if (input.getAttribute("lw-tst") === "input_resendQuantity") {
+                        input_resendForm = input;
+                        input.addEventListener("change", isResendFormValid);
+                    }
+                }
+            }
+
+            //checking if button need to be disabled
+            isResendFormValid();
+        }
     };
 
-    function isFormValid() {
-        console.log("checking");
-        var btn = getSubmitButton();
+    function isReturnFormValid() {
+        var btn = getSubmitButton("Add Return");
         if (!btn) {
-            btn.disabled = true;
             return;
         }
-        if (!select_validate || !input_validate) {
+
+        if (!select_returnForm || !input_returnForm) {
             btn.disabled = true;
             return;
         }
 
-        if (select_validate.value === "?") {
+        if (select_returnForm.value === "?") {
             btn.disabled = true;
             return;
         }
 
-        if (!isNum(input_validate.value) || parseInt(input_validate.value) <= 0 || parseInt(input_validate.value) > 4) {
+        if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 || parseInt(input_returnForm.value) > 4) {
             btn.disabled = true;
             return;
         }
-        console.log("enabled");
+
+        btn.disabled = false;
+    }
+
+    function isResendFormValid() {
+        var btn = getSubmitButton("Add Resend");
+        if (!btn) {
+            return;
+        }
+        
+        if (!select_resendForm || !input_resendForm) {
+            btn.disabled = true;
+            return;
+        }
+
+        if (select_resendForm.value === "?") {
+            btn.disabled = true;
+            return;
+        }
+
+        if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 || parseInt(input_resendForm.value) > 4) {
+            btn.disabled = true;
+            return;
+        }
+
         btn.disabled = false;
     }
 
@@ -245,13 +305,13 @@ define(function (require) {
         return /^\d+$/.test(str);
     }
 
-    function getSubmitButton() {
+    function getSubmitButton(text) {
         var btnsDiv = document.getElementsByClassName("buttons")[1];
         if (btnsDiv) {
             var buttons = btnsDiv.getElementsByTagName("button");
             if (buttons) {
                 for (var i = 0; i < buttons.length; i++) {
-                    if (buttons[i].firstChild.nodeValue === "Add Return") {
+                    if (buttons[i].firstChild.nodeValue === text) {
                         return buttons[i];
                     }
                 }
