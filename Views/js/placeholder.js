@@ -162,6 +162,10 @@ define(function (require) {
         if (returnForm) {
           var selects = returnForm.getElementsByTagName("select");
           if (selects) {
+            var btn = getSubmitButton();
+            //btn.removeAttribute("ng-disabled");
+            btn.setAttribute("ng-disabled", "!isFormValid()");
+
             for (var select of selects) {
               //making return location select readonly
               if (select.getAttribute("lw-tst") === "select_returnLocation") {
@@ -184,9 +188,6 @@ define(function (require) {
               }
             }
           }
-
-          
-
         }
 
         //removing exchange tab
@@ -239,9 +240,7 @@ define(function (require) {
 
     const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
     console.log(userPermissions);
-    var btn = getSubmitButton();
-    //btn.removeAttribute("ng-disabled");
-    btn.setAttribute("ng-disabled", "!isFormValid()");
+    
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
       observer.observe(targetNode, config);
