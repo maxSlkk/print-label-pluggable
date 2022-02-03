@@ -169,7 +169,7 @@ define(function (require) {
               }
               //checking if there is anything selected in category select
               if (select.getAttribute("lw-tst") === "select_reasonCategory") {
-                input.addEventListener("change", isFormValid);
+                select.addEventListener("change", isFormValid);
               }
             }
           }
