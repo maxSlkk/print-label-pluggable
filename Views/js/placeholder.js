@@ -211,7 +211,7 @@ define(function (require) {
                         //removing tab content
                         exchangeForm.parentElement.remove();
                         break;
-                }
+                    }
                 }
             }
         }
