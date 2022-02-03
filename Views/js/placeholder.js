@@ -196,9 +196,9 @@ define(function (require) {
             for (var li of lis) {
               if (li.getAttribute("lw-tst") === "tab_Exchange") {
                 //removing tab
-                li.innerHTML = "";
+                li.remove();
                 //removing tab content
-                exchangeForm.parentElement.innerHTML = "";
+                exchangeForm.parentElement.remove();
                 break;
               }
             }
