@@ -168,12 +168,13 @@ define(function (require) {
               //adding onChange handler to reason category select
               if (select.getAttribute("lw-tst") === "select_reasonCategory") {
                 //select.
+                console.log("select_reasonCategory");
               }
             }
           }
 
           //making refund input readonly
-          var inputs = resendForm.getElementsByTagName("input");
+          var inputs = returnForm.getElementsByTagName("input");
           if (inputs) {
             for (var input of inputs) {
               if (input.getAttribute("lw-tst") === "input_Refund") {
