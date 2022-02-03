@@ -194,10 +194,7 @@ define(function (require) {
             }
 
             //checking if button need to be disabled
-            var btn = getSubmitButton();
-            if (btn) {
-                btn.disabled = !isFormValid();
-            }
+            isFormValid();
         }
 
         //removing exchange tab
@@ -221,19 +218,27 @@ define(function (require) {
 
     function isFormValid() {
         console.log("checking");
+        var btn = getSubmitButton();
+        if (!btn) {
+            btn.disabled = true;
+            return;
+        }
         if (!select_validate || !input_validate) {
-            return false;
+            btn.disabled = true;
+            return;
         }
 
         if (select_validate.value === "?") {
-            return false;
+            btn.disabled = true;
+            return;
         }
 
         if (!isNum(input_validate.value) || parseInt(input_validate.value) <= 0 || parseInt(input_validate.value) > 4) {
-            return false;
+            btn.disabled = true;
+            return;
         }
         console.log("enabled");
-        return true;
+        btn.disabled = false;
     }
 
     function isNum (str) {
