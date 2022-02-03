@@ -210,12 +210,12 @@ define(function (require) {
     };
 
     function getSubmitButton() {
-        var btnsDiv = document.getElementsByClassName("buttons")[0];
+        var btnsDiv = document.getElementsByClassName("buttons")[1];
         if (btnsDiv) {
             var buttons = btnsDiv.getElementsByTagName("button");
             if (buttons) {
                 for (var button in buttons) {
-                    if (button.getAttribute("lw-tst") === "btn_addToRequest") {
+                    if (button.firstChild.nodeValue === "Add Return") {
                         return button;
                     }
                 }
