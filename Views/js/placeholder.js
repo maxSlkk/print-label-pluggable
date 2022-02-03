@@ -163,8 +163,8 @@ define(function (require) {
           var selects = returnForm.getElementsByTagName("select");
           if (selects) {
             var btn = getSubmitButton();
-            //btn.removeAttribute("ng-disabled");
-            btn.setAttribute("ng-disabled", "!isFormValid()");
+            btn.removeAttribute("ng-disabled");
+            //btn.setAttribute("ng-disabled", "!isFormValid()");
 
             for (var select of selects) {
               //making return location select readonly
