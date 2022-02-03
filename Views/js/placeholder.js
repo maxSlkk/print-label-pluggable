@@ -191,18 +191,18 @@ define(function (require) {
         //removing exchange tab
         var exchangeForm = document.getElementsByName("submissionForm.Exchange")[0];
         if (exchangeForm) {
-          //removing tab
           var lis = exchangeForm.parentElement.parentElement.parentElement.getElementsByTagName("li");
           if (lis) {
             for (var li of lis) {
               if (li.getAttribute("lw-tst") === "tab_Exchange") {
+                //removing tab
                 li.innerHTML = "";
+                //removing tab content
+                exchangeForm.parentElement.innerHTML = "";
                 break;
               }
             }
           }
-          //removing tab content
-          exchangeForm.parentElement.innerHTML = "";
         }
       
     };
