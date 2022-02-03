@@ -156,19 +156,21 @@ define(function (require) {
     //     }
     //   }
 
+        
+
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
           var selects = returnForm.getElementsByTagName("select");
           if (selects) {
+            var btn = getSubmitButton();
             for (var select of selects) {
               //making return location select readonly
               if (select.getAttribute("lw-tst") === "select_returnLocation") {
                 select.setAttribute('readonly', true);
               }
-              //adding onChange handler to reason category select
-              if (select.getAttribute("lw-tst") === "select_reasonCategory") {
-                //select.
-                console.log("select_reasonCategory");
+              //checking if there is anything selected in category select
+              if (select.getAttribute("lw-tst") === "select_reasonCategory" && btn) {
+                  btn.disabled = (select.value === "?");
               }
             }
           }
@@ -206,6 +208,20 @@ define(function (require) {
         }
       
     };
+
+    function getSubmitButton() {
+        var btnsDiv = document.getElementsByClassName("buttons")[0];
+        if (btnsDiv) {
+            var buttons = btnsDiv.getElementsByTagName("button");
+            if (buttons) {
+                for (var button in buttons) {
+                    if (button.getAttribute("lw-tst") === "btn_addToRequest") {
+                        return button;
+                    }
+                }
+            }
+        }
+    }
 
     const observer = new MutationObserver(callback);
 
