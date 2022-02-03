@@ -125,13 +125,8 @@ define(function (require) {
     var input_returnForm;
     var select_resendForm;
     var input_resendForm;
-    console.log("scope");
-    console.log(scope);
-    console.log($scope);
+
     var callback = function (mutationsList, observer) {
-        console.log("scope callback");
-        console.log(scope);
-        console.log($scope);
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
             var selects = returnForm.getElementsByTagName("select");
