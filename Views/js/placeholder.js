@@ -162,7 +162,6 @@ define(function (require) {
         if (returnForm) {
           var selects = returnForm.getElementsByTagName("select");
           if (selects) {
-            var btn = getSubmitButton();
             for (var select of selects) {
               //making return location select readonly
               if (select.getAttribute("lw-tst") === "select_returnLocation") {
@@ -209,6 +208,17 @@ define(function (require) {
       
     };
 
+    function isFormValid() {
+        var returnForm = document.getElementsByName("submissionForm.Return")[0];
+        var selects = returnForm.getElementsByTagName("select");
+        if (parseInt(selects[0]) == 4) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     function getSubmitButton() {
         var btnsDiv = document.getElementsByClassName("buttons")[1];
         if (btnsDiv) {
@@ -229,7 +239,9 @@ define(function (require) {
 
     const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
     console.log(userPermissions);
-
+    var btn = getSubmitButton();
+    //btn.removeAttribute("ng-disabled");
+    btn.setAttribute("ng-disabled", "!isFormValid()");
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
       observer.observe(targetNode, config);
