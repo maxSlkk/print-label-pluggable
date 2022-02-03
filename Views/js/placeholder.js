@@ -115,68 +115,116 @@
 
 //PLACEHOLDER FOR ADVANCED PERMISSIONS APP
 
-// "use strict";
+"use strict";
 
-// define(function (require) {
-//   $(document).ready(function ($scope) {
-//     const config = { childList: true, subtree: true };
+define(function (require) {
+  $(document).ready(function ($scope) {
+    const config = { childList: true, subtree: true };
 
-//     var callback = function (mutationsList, observer) {
+    var callback = function (mutationsList, observer) {
 
-//       if (userPermissions.some(x => x.fieldName === 'input_additionalCost')) {
-//         var resendForm = document.getElementsByName("submissionForm.Resend")[0];
-//         if (resendForm) {
-//           var inputs = resendForm.getElementsByTagName("input");
-//           if (inputs) {
-//             for (var input of inputs) {
-//               if (input.getAttribute("lw-tst") === "input_additionalCost") {
-//                 input.parentElement.parentElement.innerHTML = "";
-//                 break;
-//               }
-//             }
-//           }
-//         }
-//       }
+    //   if (userPermissions.some(x => x.fieldName === 'input_additionalCost')) {
+    //     var resendForm = document.getElementsByName("submissionForm.Resend")[0];
+    //     if (resendForm) {
+    //       var inputs = resendForm.getElementsByTagName("input");
+    //       if (inputs) {
+    //         for (var input of inputs) {
+    //           if (input.getAttribute("lw-tst") === "input_additionalCost") {
+    //             input.parentElement.parentElement.innerHTML = "";
+    //             break;
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
 
-//       if (userPermissions.some(x => x.fieldName === 'advancedPermissions')) {
-//         var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
-//         if (appsContainer) {
-//           var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
-//           if (moduleContainers.length > 0) {
-//             for (var moduleContainer of moduleContainers) {
-//               var nameModule = moduleContainer.getElementsByClassName("module-name-text")[0];
-//               if (nameModule) {
-//                 if (nameModule.getAttribute("title") === "Custom Permissions Setup") {
-//                   moduleContainer.innerHTML = "";
-//                   break;
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
+    //   if (userPermissions.some(x => x.fieldName === 'advancedPermissions')) {
+    //     var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
+    //     if (appsContainer) {
+    //       var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
+    //       if (moduleContainers.length > 0) {
+    //         for (var moduleContainer of moduleContainers) {
+    //           var nameModule = moduleContainer.getElementsByClassName("module-name-text")[0];
+    //           if (nameModule) {
+    //             if (nameModule.getAttribute("title") === "Custom Permissions Setup") {
+    //               moduleContainer.innerHTML = "";
+    //               break;
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+
+        var returnForm = document.getElementsByName("submissionForm.Return")[0];
+        if (returnForm) {
+          var selects = returnForm.getElementsByTagName("select");
+          if (selects) {
+            for (var select of selects) {
+              //making return location select readonly
+              if (select.getAttribute("lw-tst") === "select_returnLocation") {
+                select.setAttribute('readonly', true);
+              }
+              //adding onChange handler to reason category select
+              if (select.getAttribute("lw-tst") === "select_reasonCategory") {
+                //select.
+              }
+            }
+          }
+
+          //making refund input readonly
+          var inputs = resendForm.getElementsByTagName("input");
+          if (inputs) {
+            for (var input of inputs) {
+              if (input.getAttribute("lw-tst") === "input_Refund") {
+                input.setAttribute('readonly', true);
+                break;
+              }
+            }
+          }
+
+          
+
+        }
+
+        //removing exchange tab
+        var exchangeForm = document.getElementsByName("submissionForm.Exchange")[0];
+        if (exchangeForm) {
+          //removing tab
+          var lis = exchangeForm.parentElement.parentElement.parentElement.getElementsByTagName("li");
+          if (lis) {
+            for (var li of lis) {
+              if (li.getAttribute("lw-tst") === "tab_Exchange") {
+                li.innerHTML = "";
+                break;
+              }
+            }
+          }
+          //removing tab content
+          exchangeForm.parentElement.innerHTML = "";
+        }
       
-//     };
+    };
 
-//     const observer = new MutationObserver(callback);
+    const observer = new MutationObserver(callback);
 
-//     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
+    const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
 
-//     const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
-//     console.log(userPermissions);
+    const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
+    console.log(userPermissions);
 
-//     setTimeout(function () {
-//       const targetNode = document.getElementsByTagName("body")[0];
-//       observer.observe(targetNode, config);
-//     }, 2000);
-//   });
+    setTimeout(function () {
+      const targetNode = document.getElementsByTagName("body")[0];
+      observer.observe(targetNode, config);
+    }, 2000);
+  });
 
-//   function getUserPermissions(userEmail, token)
-//   {
-//     var xmlHttp = new XMLHttpRequest();
-//       xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getUserConfiguration?userEmail="+userEmail, false);
-//     xmlHttp.setRequestHeader('Authorization', token);
-//     xmlHttp.send(null);
-//     return xmlHttp.responseText;
-//   }
-// });
+  function getUserPermissions(userEmail, token)
+  {
+    var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getUserConfiguration?userEmail="+userEmail, false);
+    xmlHttp.setRequestHeader('Authorization', token);
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+  }
+});
