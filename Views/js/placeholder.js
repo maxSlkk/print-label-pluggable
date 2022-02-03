@@ -121,6 +121,9 @@ define(function (require) {
   $(document).ready(function ($scope) {
     const config = { childList: true, subtree: true };
 
+    var select_validate;
+    var input_validate;
+
     var callback = function (mutationsList, observer) {
 
     //   if (userPermissions.some(x => x.fieldName === 'input_additionalCost')) {
@@ -156,8 +159,7 @@ define(function (require) {
     //     }
     //   }
 
-        var select_validate;
-        var input_validate;
+        
         
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
