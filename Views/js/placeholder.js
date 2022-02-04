@@ -125,13 +125,12 @@ define(function (require) {
     var input_returnForm;
     var select_resendForm;
     var input_resendForm;
-    
-    var _scope = $scope;
+
+    var maxQuantity = 1;
 
     var callback = function (mutationsList, observer) {
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
-            console.log(_scope);
             var selects = returnForm.getElementsByTagName("select");
             if (selects) {
                 for (var select of selects) {
@@ -156,6 +155,7 @@ define(function (require) {
                     }
 
                     if (input.getAttribute("lw-tst") === "input_returnQuantity") {
+                        maxQuantity = parseInt(input.getAttribute("max"));
                         input_returnForm = input;
                         input.addEventListener("change", isReturnFormValid);
                     }
@@ -209,6 +209,7 @@ define(function (require) {
                     }
 
                     if (input.getAttribute("lw-tst") === "input_resendQuantity") {
+                        input.setAttribute("max", maxQuantity);
                         input_resendForm = input;
                         input.addEventListener("change", isResendFormValid);
                     }
@@ -236,7 +237,8 @@ define(function (require) {
             return;
         }
 
-        if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 || parseInt(input_returnForm.value) > 4) {
+        if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
+            || parseInt(input_returnForm.value) > maxQuantity) {
             btn.disabled = true;
             return;
         }
@@ -260,7 +262,8 @@ define(function (require) {
             return;
         }
 
-        if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 || parseInt(input_resendForm.value) > 4) {
+        if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 
+            || parseInt(input_resendForm.value) > maxQuantity) {
             btn.disabled = true;
             return;
         }
