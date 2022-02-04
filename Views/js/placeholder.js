@@ -127,6 +127,7 @@ define(function (require) {
     var input_resendForm;
 
     var maxQuantity = 1;
+    var refundSum = 0.0;
 
     var callback = function (mutationsList, observer) {
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
@@ -151,6 +152,7 @@ define(function (require) {
             if (inputs) {
                 for (var input of inputs) {
                     if (input.getAttribute("lw-tst") === "input_Refund") {
+                        refundSum = parseFloat(input.value);
                         input.setAttribute('readonly', true);
                     }
 
@@ -205,6 +207,7 @@ define(function (require) {
             if (inputs) {
                 for (var input of inputs) {
                     if (input.getAttribute("lw-tst") === "input_Refund") {
+                        input.value = refundSum;
                         input.setAttribute('readonly', true);
                     }
 
