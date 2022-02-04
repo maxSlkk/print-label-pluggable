@@ -175,7 +175,13 @@ define(function (require) {
             //checking if button need to be disabled
             isReturnFormValid();
         }
-
+        else {
+            maxQuantity = 1;
+            isMaxQuantitySet = false;
+            refundSum = 0.0;
+            isRefundSumSet = false;
+        }
+        
         //removing exchange tab and form
         var exchangeForm = document.getElementsByName("submissionForm.Exchange")[0];
         if (exchangeForm) {
