@@ -127,7 +127,9 @@ define(function (require) {
     var input_resendForm;
 
     var maxQuantity = 1;
+    var isMaxQuantitySet = false;
     var refundSum = 0.0;
+    var isRefundSumSet = false;
 
     var callback = function (mutationsList, observer) {
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
@@ -152,12 +154,18 @@ define(function (require) {
             if (inputs) {
                 for (var input of inputs) {
                     if (input.getAttribute("lw-tst") === "input_Refund") {
-                        refundSum = parseFloat(input.value);
+                        if (!isRefundSumSet) {
+                            refundSum = parseFloat(input.value);
+                            isRefundSumSet = true;
+                        }
                         input.setAttribute('readonly', true);
                     }
 
                     if (input.getAttribute("lw-tst") === "input_returnQuantity") {
-                        maxQuantity = parseInt(input.getAttribute("max"));
+                        if (!isMaxQuantitySet) {
+                            maxQuantity = parseInt(input.getAttribute("max"));
+                            isMaxQuantitySet = true;
+                        }
                         input_returnForm = input;
                         input.addEventListener("change", isReturnFormValid);
                     }
