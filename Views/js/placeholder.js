@@ -126,7 +126,7 @@ define(function (require) {
     var select_resendForm;
     var input_resendForm;
 
-    var allowedQuantity = 1;
+    var allowedQuantity = 0;
     var isAllowedQuantitySet = false;
     var refundSum = 0.0;
     var isRefundSumSet = false;
