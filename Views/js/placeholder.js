@@ -241,6 +241,20 @@ define(function (require) {
             //checking if button need to be disabled
             isResendFormValid();
         }
+
+        var refundWindow = document.getElementsByClassName("Refund_AddView")[0];
+        if (refundWindow) {
+            var inputs = refundWindow.getElementsByTagName("input");
+            if (inputs) {
+                for (var input of inputs) {
+                    if (input.getAttribute("lw-tst") === "number") {
+                        var value = input.getAttribute("max");
+                        input.value = parseFloat(value);
+                        input.setAttribute('readonly', true);
+                    }
+                }
+            }
+        }
     };
 
     function isReturnFormValid() {
