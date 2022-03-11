@@ -311,7 +311,6 @@ define(function (require) {
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
 
     const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
-    console.log(userPermissions);
     
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
