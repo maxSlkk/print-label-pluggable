@@ -231,6 +231,10 @@ define(function (require) {
                         input_resendForm = input;
                         input.addEventListener("change", isResendFormValid);
                     }
+
+                    if (input.getAttribute("lw-tst") === "input_additionalCost") {
+                        input.setAttribute('readonly', true);
+                      }
                 }
             }
 
