@@ -126,8 +126,8 @@ define(function (require) {
     var select_resendForm;
     var input_resendForm;
 
-    var maxQuantity = 1;
-    var isMaxQuantitySet = false;
+    var allowedQuantity = 1;
+    var isAllowedQuantitySet = false;
     var refundSum = 0.0;
     var isRefundSumSet = false;
 
@@ -162,9 +162,10 @@ define(function (require) {
                     }
 
                     if (input.getAttribute("lw-tst") === "input_returnQuantity") {
-                        if (!isMaxQuantitySet) {
-                            maxQuantity = parseInt(input.getAttribute("max"));
-                            isMaxQuantitySet = true;
+                        if (!isAllowedQuantitySet) {
+                            allowedQuantity = parseInt(input.getAttribute("max"));
+                            input.setAttribute("min", allowedQuantity);
+                            isAllowedQuantitySet = true;
                         }
                         input_returnForm = input;
                         input.addEventListener("change", isReturnFormValid);
@@ -176,8 +177,8 @@ define(function (require) {
             isReturnFormValid();
         }
         else {
-            maxQuantity = 1;
-            isMaxQuantitySet = false;
+            allowedQuantity = 0;
+            isAllowedQuantitySet = false;
             refundSum = 0.0;
             isRefundSumSet = false;
         }
@@ -226,7 +227,7 @@ define(function (require) {
                     }
 
                     if (input.getAttribute("lw-tst") === "input_resendQuantity") {
-                        input.setAttribute("max", maxQuantity);
+                        input.setAttribute("max", allowedQuantity);
                         input_resendForm = input;
                         input.addEventListener("change", isResendFormValid);
                     }
@@ -255,7 +256,7 @@ define(function (require) {
         }
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
-            || parseInt(input_returnForm.value) > maxQuantity) {
+            || parseInt(input_returnForm.value) != allowedQuantity) {
             btn.disabled = true;
             return;
         }
@@ -280,7 +281,7 @@ define(function (require) {
         }
 
         if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 
-            || parseInt(input_resendForm.value) > maxQuantity) {
+            || parseInt(input_resendForm.value) > allowedQuantity) {
             btn.disabled = true;
             return;
         }
