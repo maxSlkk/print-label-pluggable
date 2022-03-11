@@ -234,7 +234,7 @@ define(function (require) {
 
                     if (input.getAttribute("lw-tst") === "input_additionalCost") {
                         input.setAttribute('readonly', true);
-                      }
+                    }
                 }
             }
 
