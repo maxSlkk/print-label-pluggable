@@ -126,12 +126,19 @@ define(function (require) {
     var select_resendForm;
     var input_resendForm;
 
+    var invaliditySpan = null;
+
     var allowedQuantity = 0;
     var isAllowedQuantitySet = false;
     var refundSum = 0.0;
     var isRefundSumSet = false;
 
     var callback = function (mutationsList, observer) {
+        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
+        if (rmaDiv) {
+            invaliditySpan = rmaDiv.getElementsByTagName("span").filter(x => x.classList.includes("invalidity"))[0];
+        }
+
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
             var selects = returnForm.getElementsByTagName("select");
@@ -260,47 +267,74 @@ define(function (require) {
     function isReturnFormValid() {
         var btn = getSubmitButton("Add Return");
         if (!btn) {
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "";
+            }
             return;
         }
 
         if (!select_returnForm || !input_returnForm) {
             btn.disabled = true;
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "";
+            }
             return;
         }
 
         if (select_returnForm.value === "?") {
             btn.disabled = true;
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "<i>Return category is mandatory field</i>";
+            }
             return;
         }
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
             || parseInt(input_returnForm.value) != allowedQuantity) {
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "<i>Return quantity cannot be less than the order item quantity</i>";
+            }
             btn.disabled = true;
             return;
         }
 
+        if (invaliditySpan) {
+            invaliditySpan.innerHtml = "";
+        }
         btn.disabled = false;
     }
 
     function isResendFormValid() {
         var btn = getSubmitButton("Add Resend");
         if (!btn) {
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "";
+            }
             return;
         }
         
         if (!select_resendForm || !input_resendForm) {
             btn.disabled = true;
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "";
+            }
             return;
         }
 
         if (select_resendForm.value === "?") {
             btn.disabled = true;
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "<i>Return category is mandatory field</i>";
+            }
             return;
         }
 
         if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 
             || parseInt(input_resendForm.value) > allowedQuantity) {
             btn.disabled = true;
+            if (invaliditySpan) {
+                invaliditySpan.innerHtml = "<i>Return quantity cannot be less than the order item quantity</i>";
+            }
             return;
         }
 
