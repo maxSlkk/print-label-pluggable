@@ -136,7 +136,12 @@ define(function (require) {
     var callback = function (mutationsList, observer) {
         var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
         if (rmaDiv) {
-            invaliditySpan = Array.prototype.slice.call(rmaDiv.getElementsByTagName("span")).filter(x => x.classList.includes("invalidity"))[0];
+            for (var span of rmaDiv.getElementsByTagName("span")) {
+                if (span.classList.includes("invalidity")) {
+                    invaliditySpan = span;
+                    return;
+                }
+            }
         }
 
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
