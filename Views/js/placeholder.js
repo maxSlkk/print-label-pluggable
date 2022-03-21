@@ -137,7 +137,7 @@ define(function (require) {
         var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
         if (rmaDiv) {
             for (var span of rmaDiv.getElementsByTagName("span")) {
-                if (span.classList.includes("invalidity")) {
+                if (span.classList.contains("invalidity")) {
                     invaliditySpan = span;
                     return;
                 }
