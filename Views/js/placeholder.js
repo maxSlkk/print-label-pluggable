@@ -139,7 +139,8 @@ define(function (require) {
             for (var span of rmaDiv.getElementsByTagName("span")) {
                 if (span.classList.contains("invalidity")) {
                     invaliditySpan = span;
-                    break;
+                    span.innerHTML = "alslals";
+                    return;
                 }
             }
         }
