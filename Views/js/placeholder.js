@@ -308,7 +308,7 @@ define(function (require) {
         }
 
         if (invaliditySpan) {
-            invaliditySpan.innerHtml = "";
+            invaliditySpan.innerHtml = `<i>alsjflak</i>`;
         }
         btn.disabled = false;
     }
