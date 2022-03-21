@@ -126,7 +126,7 @@ define(function (require) {
     var select_resendForm;
     var input_resendForm;
 
-    var invaliditySpan = null;
+    //var invaliditySpan = null;
 
     var allowedQuantity = 0;
     var isAllowedQuantitySet = false;
@@ -134,16 +134,16 @@ define(function (require) {
     var isRefundSumSet = false;
 
     var callback = function (mutationsList, observer) {
-        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
-        if (rmaDiv) {
-            for (var span of rmaDiv.getElementsByTagName("span")) {
-                if (span.classList.contains("invalidity")) {
-                    invaliditySpan = span;
-                    console.log(span);
-                    break;
-                }
-            }
-        }
+        // var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
+        // if (rmaDiv) {
+        //     for (var span of rmaDiv.getElementsByTagName("span")) {
+        //         if (span.classList.contains("invalidity")) {
+        //             invaliditySpan = span;
+        //             console.log(span);
+        //             break;
+        //         }
+        //     }
+        // }
 
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
@@ -273,79 +273,79 @@ define(function (require) {
     function isReturnFormValid() {
         var btn = getSubmitButton("Add Return");
         if (!btn) {
-            if (invaliditySpan) {
-                invaliditySpan.innerHtml = "";
-            }
+            // if (invaliditySpan) {
+            //     invaliditySpan.innerHtml = "";
+            // }
             return;
         }
 
         if (!select_returnForm || !input_returnForm) {
             btn.disabled = true;
-            if (invaliditySpan) {
-                invaliditySpan.innerHtml = "";
-            }
+            // if (invaliditySpan) {
+            //     invaliditySpan.innerHtml = "";
+            // }
             return;
         }
 
         if (select_returnForm.value === "?") {
             btn.disabled = true;
-            console.log(invaliditySpan);
-            if (invaliditySpan) {
-                console.log('1');
-                invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
-            }
+            // console.log(invaliditySpan);
+            // if (invaliditySpan) {
+            //     console.log('1');
+            //     invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
+            // }
             return;
         }
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
             || parseInt(input_returnForm.value) != allowedQuantity) {
-            if (invaliditySpan) {
-                console.log('2');
-                invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
-            }
+            // if (invaliditySpan) {
+            //     console.log('2');
+            //     invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
+            // }
             btn.disabled = true;
             return;
         }
 
-        if (invaliditySpan) {
-            invaliditySpan.innerHtml = `<i>alsjflak</i>`;
-        }
+        // if (invaliditySpan) {
+        //     invaliditySpan.innerHtml = `<i>alsjflak</i>`;
+        // }
         btn.disabled = false;
     }
 
     function isResendFormValid() {
         var btn = getSubmitButton("Add Resend");
         if (!btn) {
-            if (invaliditySpan) {
-                invaliditySpan.innerHtml = "";
-            }
+            // if (invaliditySpan) {
+            //     invaliditySpan.innerHtml = "";
+            // }
             return;
         }
         
         if (!select_resendForm || !input_resendForm) {
             btn.disabled = true;
-            if (invaliditySpan) {
-                invaliditySpan.innerHtml = "";
-            }
+            // if (invaliditySpan) {
+            //     invaliditySpan.innerHtml = "";
+            // }
             return;
         }
 
         if (select_resendForm.value === "?") {
             btn.disabled = true;
-            if (invaliditySpan) {
-                console.log('3');
-                invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
-            }
+            // if (invaliditySpan) {
+            //     console.log('3');
+            //     invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
+            // }
             return;
         }
 
         if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 
             || parseInt(input_resendForm.value) > allowedQuantity) {
             btn.disabled = true;
-            if (invaliditySpan) {
-                console.log('4');
-                invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
-            }
+            // if (invaliditySpan) {
+            //     console.log('4');
+            //     invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
+            // }
             return;
         }
 
