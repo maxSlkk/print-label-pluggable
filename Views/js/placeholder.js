@@ -139,6 +139,7 @@ define(function (require) {
             for (var span of rmaDiv.getElementsByTagName("span")) {
                 if (span.classList.contains("invalidity")) {
                     invaliditySpan = span;
+                    console.log(span);
                     break;
                 }
             }
@@ -288,8 +289,9 @@ define(function (require) {
 
         if (select_returnForm.value === "?") {
             btn.disabled = true;
+            console.log(invaliditySpan);
             if (invaliditySpan) {
-                console.log(invaliditySpan);
+                console.log('1');
                 invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             }
             return;
