@@ -139,8 +139,7 @@ define(function (require) {
             for (var span of rmaDiv.getElementsByTagName("span")) {
                 if (span.classList.contains("invalidity")) {
                     invaliditySpan = span;
-                    span.innerHTML = "alslals";
-                    return;
+                    break;
                 }
             }
         }
@@ -290,7 +289,7 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             if (invaliditySpan) {
-                invaliditySpan.innerHtml = "<i>Return category is mandatory field</i>";
+                invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             }
             return;
         }
@@ -298,7 +297,7 @@ define(function (require) {
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
             || parseInt(input_returnForm.value) != allowedQuantity) {
             if (invaliditySpan) {
-                invaliditySpan.innerHtml = "<i>Return quantity cannot be less than the order item quantity</i>";
+                invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
             }
             btn.disabled = true;
             return;
@@ -330,7 +329,7 @@ define(function (require) {
         if (select_resendForm.value === "?") {
             btn.disabled = true;
             if (invaliditySpan) {
-                invaliditySpan.innerHtml = "<i>Return category is mandatory field</i>";
+                invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             }
             return;
         }
@@ -339,7 +338,7 @@ define(function (require) {
             || parseInt(input_resendForm.value) > allowedQuantity) {
             btn.disabled = true;
             if (invaliditySpan) {
-                invaliditySpan.innerHtml = "<i>Return quantity cannot be less than the order item quantity</i>";
+                invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
             }
             return;
         }
