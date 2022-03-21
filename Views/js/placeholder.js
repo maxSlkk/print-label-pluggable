@@ -289,6 +289,7 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             if (invaliditySpan) {
+                console.log(invaliditySpan);
                 invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             }
             return;
@@ -297,6 +298,7 @@ define(function (require) {
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
             || parseInt(input_returnForm.value) != allowedQuantity) {
             if (invaliditySpan) {
+                console.log('2');
                 invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
             }
             btn.disabled = true;
@@ -329,6 +331,7 @@ define(function (require) {
         if (select_resendForm.value === "?") {
             btn.disabled = true;
             if (invaliditySpan) {
+                console.log('3');
                 invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             }
             return;
@@ -338,6 +341,7 @@ define(function (require) {
             || parseInt(input_resendForm.value) > allowedQuantity) {
             btn.disabled = true;
             if (invaliditySpan) {
+                console.log('4');
                 invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
             }
             return;
