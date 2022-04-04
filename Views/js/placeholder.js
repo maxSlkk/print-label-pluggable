@@ -126,25 +126,12 @@ define(function (require) {
     var select_resendForm;
     var input_resendForm;
 
-    var invaliditySpan = null;
-
     var allowedQuantity = 0;
     var isAllowedQuantitySet = false;
     var refundSum = 0.0;
     var isRefundSumSet = false;
 
     var callback = function (mutationsList, observer) {
-        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
-        if (rmaDiv) {
-            for (var span of rmaDiv.getElementsByTagName("span")) {
-                if (span.classList.contains("invalidity")) {
-                    span.classList.remove('invalidity');
-                    console.log(span);
-                    invaliditySpan = span;
-                    break;
-                }
-            }
-        }
 
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
@@ -294,7 +281,8 @@ define(function (require) {
             console.log('select is empty!');
             // if (invaliditySpan) {
             //     console.log('1');
-                 invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
+            addTextToSpan(`<i>Return category is mandatory field</i>`);
+                 //invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             // }
             return;
         }
@@ -313,6 +301,20 @@ define(function (require) {
         //     invaliditySpan.innerHtml = `<i>alsjflak</i>`;
         // }
         btn.disabled = false;
+    }
+
+    function addTextToSpan(text) {
+        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
+        if (rmaDiv) {
+            for (var span of rmaDiv.getElementsByTagName("span")) {
+                if (span.classList.contains("invalidity")) {
+                    //span.classList.remove('invalidity');
+                    console.log(span);
+                    span.innerHtml = text;
+                    break;
+                }
+            }
+        }
     }
 
     function isResendFormValid() {
