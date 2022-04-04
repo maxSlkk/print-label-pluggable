@@ -157,6 +157,8 @@ define(function (require) {
                     //checking if there is anything selected in category select
                     if (select.getAttribute("lw-tst") === "select_reasonCategory") {
                         select_returnForm = select;
+                        select.required = true;
+                        console.log('required set');
                         select.addEventListener("change", isReturnFormValid);
                     }
                 }
