@@ -126,7 +126,7 @@ define(function (require) {
     var select_resendForm;
     var input_resendForm;
 
-    //var invaliditySpan = null;
+    var invaliditySpan = null;
 
     var allowedQuantity = 0;
     var isAllowedQuantitySet = false;
