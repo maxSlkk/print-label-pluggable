@@ -139,7 +139,6 @@ define(function (require) {
             for (var span of rmaDiv.getElementsByTagName("span")) {
                 if (span.classList.contains("invalidity")) {
                     invaliditySpan = span;
-                    console.log(span);
                     break;
                 }
             }
@@ -293,7 +292,7 @@ define(function (require) {
             console.log('select is empty!');
             // if (invaliditySpan) {
             //     console.log('1');
-            //     invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
+                 invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             // }
             return;
         }
