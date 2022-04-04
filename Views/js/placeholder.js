@@ -278,13 +278,17 @@ define(function (require) {
 
         if (select_returnForm.value === "?") {
             btn.disabled = true;
+            select_returnForm.classList.add("selectInvalid");
             console.log('select is empty!');
             // if (invaliditySpan) {
             //     console.log('1');
-            addTextToSpan(`<i>Return category is mandatory field</i>`);
+            //addTextToSpan(`<i>Return category is mandatory field</i>`);
                  //invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             // }
             return;
+        }
+        else {
+            select_returnForm.classList.remove("selectInvalid");
         }
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
@@ -336,11 +340,15 @@ define(function (require) {
 
         if (select_resendForm.value === "?") {
             btn.disabled = true;
+            select_resendForm.classList.add("selectInvalid");
             // if (invaliditySpan) {
             //     console.log('3');
             //     invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
             // }
             return;
+        }
+        else {
+            select_resendForm.classList.remove("selectInvalid");
         }
 
         if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 
@@ -373,6 +381,10 @@ define(function (require) {
             }
         }
     }
+
+    var style = document.createElement('style');
+    style.innerHTML = '.selectInvalid { color: #b94a48!important; border-color: #b94a48!important; }';
+    document.getElementsByTagName('head')[0].appendChild(style);
 
     const observer = new MutationObserver(callback);
 
