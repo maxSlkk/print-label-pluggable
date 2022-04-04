@@ -134,16 +134,16 @@ define(function (require) {
     var isRefundSumSet = false;
 
     var callback = function (mutationsList, observer) {
-        // var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
-        // if (rmaDiv) {
-        //     for (var span of rmaDiv.getElementsByTagName("span")) {
-        //         if (span.classList.contains("invalidity")) {
-        //             invaliditySpan = span;
-        //             console.log(span);
-        //             break;
-        //         }
-        //     }
-        // }
+        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
+        if (rmaDiv) {
+            for (var span of rmaDiv.getElementsByTagName("span")) {
+                if (span.classList.contains("invalidity")) {
+                    invaliditySpan = span;
+                    console.log(span);
+                    break;
+                }
+            }
+        }
 
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
@@ -158,7 +158,6 @@ define(function (require) {
                     if (select.getAttribute("lw-tst") === "select_reasonCategory") {
                         select_returnForm = select;
                         select.required = true;
-                        console.log('required set');
                         select.addEventListener("change", isReturnFormValid);
                     }
                 }
@@ -291,7 +290,7 @@ define(function (require) {
 
         if (select_returnForm.value === "?") {
             btn.disabled = true;
-            // console.log(invaliditySpan);
+            console.log('select is empty!');
             // if (invaliditySpan) {
             //     console.log('1');
             //     invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
