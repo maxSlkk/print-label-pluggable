@@ -138,6 +138,8 @@ define(function (require) {
         if (rmaDiv) {
             for (var span of rmaDiv.getElementsByTagName("span")) {
                 if (span.classList.contains("invalidity")) {
+                    span.classList.remove('invalidity');
+                    console.log(span);
                     invaliditySpan = span;
                     break;
                 }
