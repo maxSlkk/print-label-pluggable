@@ -134,8 +134,10 @@ define(function (require) {
     var isSpanAdded = false;
 
     var callback = function (mutationsList, observer) {
-console.log(mutationsList[0]);
-console.log(mutationsList[1]);
+        if (mutationsList.length == 2 && mutationsList[0].target.id === "custom-invalidity-text") {
+            return;
+        }
+        
         if (!isSpanAdded) {
             var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
             if (rmaDiv) {
