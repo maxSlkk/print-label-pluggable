@@ -273,6 +273,7 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
+            console.log("select invalid");
             addTextToSpan();
             return;
         }
@@ -289,13 +290,16 @@ define(function (require) {
         btn.disabled = false;
     }
 
-    function addTextToSpan(text) {
+    function addTextToSpan() {
         var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
         if (rmaDiv) {
-            var divWithSpan = document.getElementsByClassName("forced-relative")[0];
+            var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
             if (divWithSpan) {
+                console.log(divWithSpan);
                 for (var span of rmaDiv.getElementsByTagName("span")) {
                     if (span.classList.contains("invalidity")) {
+                        console.log('removing span');
+                        console.log(span);
                         span.remove();
                         break;
                     }
