@@ -299,12 +299,12 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
-            addInvalidityText("Return category is mandatory field");
+            //addInvalidityText("Return category is mandatory field");
             return;
         }
         else {
             select_returnForm.classList.remove("selectInvalid");
-            addInvalidityText("");
+            //addInvalidityText("");
         }
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
