@@ -130,6 +130,7 @@ define(function (require) {
     var isAllowedQuantitySet = false;
     var refundSum = 0.0;
     var isRefundSumSet = false;
+
     var isSpanAdded = false;
 
     var callback = function (mutationsList, observer) {
@@ -138,20 +139,23 @@ define(function (require) {
         if (rmaDiv && !isSpanAdded) {
             var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
             if (divWithSpan) {
-                console.log(divWithSpan);
                 for (var span of rmaDiv.getElementsByTagName("span")) {
                     if (span.classList.contains("invalidity")) {
-                        console.log('removing span');
-                        console.log(span);
                         span.remove();
                         break;
                     }
                 }
+
+                var tagSpan = document.createElement("span");
+                var tagI = document.createElement("i");
+                tagI.setAttribute("id", "custom-invalidity-text");
+
+                //var text = document.createTextNode("Return category is mandatory field");
+                //tag.appendChild(text);
+                tagSpan.appendChild(tagI);
+                divWithSpan.insertBefore(tagSpan, divWithSpan.firstChild);
+
                 isSpanAdded = true;
-                var tag = document.createElement("span");
-                var text = document.createTextNode("Return category is mandatory field");
-                tag.appendChild(text);
-                divWithSpan.appendChild(tag);
             }
         }
 
@@ -295,12 +299,12 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
-            console.log("select invalid");
-            //addTextToSpan();
+            addInvalidityText("Return category is mandatory field");
             return;
         }
         else {
             select_returnForm.classList.remove("selectInvalid");
+            addInvalidityText("");
         }
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
@@ -312,26 +316,13 @@ define(function (require) {
         btn.disabled = false;
     }
 
-    function addTextToSpan() {
-        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
-        if (rmaDiv) {
-            var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
-            if (divWithSpan) {
-                console.log(divWithSpan);
-                for (var span of rmaDiv.getElementsByTagName("span")) {
-                    if (span.classList.contains("invalidity")) {
-                        console.log('removing span');
-                        console.log(span);
-                        span.remove();
-                        break;
-                    }
-                }
+    function addInvalidityText(text) {
+        let iTag = document.getElementById("custom-invalidity-text");
 
-                var tag = document.createElement("span");
-                var text = document.createTextNode("Return category is mandatory field");
-                tag.appendChild(text);
-                divWithSpan.appendChild(tag);
-            }
+        if (iTag) {
+            var textNode = document.createTextNode(text);
+            iTag.innerHTML = "";
+            iTag.appendChild(textNode);
         }
     }
 
