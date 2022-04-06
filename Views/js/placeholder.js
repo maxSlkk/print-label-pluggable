@@ -262,29 +262,18 @@ define(function (require) {
     function isReturnFormValid() {
         var btn = getSubmitButton("Add Return");
         if (!btn) {
-            // if (invaliditySpan) {
-            //     invaliditySpan.innerHtml = "";
-            // }
             return;
         }
 
         if (!select_returnForm || !input_returnForm) {
             btn.disabled = true;
-            // if (invaliditySpan) {
-            //     invaliditySpan.innerHtml = "";
-            // }
             return;
         }
 
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
-            console.log('select is empty!');
-            // if (invaliditySpan) {
-            //     console.log('1');
-            //addTextToSpan(`<i>Return category is mandatory field</i>`);
-                 //invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
-            // }
+            addTextToSpan();
             return;
         }
         else {
@@ -293,30 +282,29 @@ define(function (require) {
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
             || parseInt(input_returnForm.value) != allowedQuantity) {
-            // if (invaliditySpan) {
-            //     console.log('2');
-            //     invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
-            // }
             btn.disabled = true;
             return;
         }
 
-        // if (invaliditySpan) {
-        //     invaliditySpan.innerHtml = `<i>alsjflak</i>`;
-        // }
         btn.disabled = false;
     }
 
     function addTextToSpan(text) {
         var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
         if (rmaDiv) {
-            for (var span of rmaDiv.getElementsByTagName("span")) {
-                if (span.classList.contains("invalidity")) {
-                    //span.classList.remove('invalidity');
-                    console.log(span);
-                    span.innerHtml = text;
-                    break;
+            var divWithSpan = document.getElementsByClassName("forced-relative")[0];
+            if (divWithSpan) {
+                for (var span of rmaDiv.getElementsByTagName("span")) {
+                    if (span.classList.contains("invalidity")) {
+                        span.remove();
+                        break;
+                    }
                 }
+
+                var tag = document.createElement("span");
+                var text = document.createTextNode("Return category is mandatory field");
+                tag.appendChild(text);
+                divWithSpan.appendChild(tag);
             }
         }
     }
@@ -324,27 +312,17 @@ define(function (require) {
     function isResendFormValid() {
         var btn = getSubmitButton("Add Resend");
         if (!btn) {
-            // if (invaliditySpan) {
-            //     invaliditySpan.innerHtml = "";
-            // }
             return;
         }
         
         if (!select_resendForm || !input_resendForm) {
             btn.disabled = true;
-            // if (invaliditySpan) {
-            //     invaliditySpan.innerHtml = "";
-            // }
             return;
         }
 
         if (select_resendForm.value === "?") {
             btn.disabled = true;
             select_resendForm.classList.add("selectInvalid");
-            // if (invaliditySpan) {
-            //     console.log('3');
-            //     invaliditySpan.innerHtml = `<i>Return category is mandatory field</i>`;
-            // }
             return;
         }
         else {
@@ -354,10 +332,6 @@ define(function (require) {
         if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 
             || parseInt(input_resendForm.value) > allowedQuantity) {
             btn.disabled = true;
-            // if (invaliditySpan) {
-            //     console.log('4');
-            //     invaliditySpan.innerHtml = `<i>Return quantity cannot be less than the order item quantity</i>`;
-            // }
             return;
         }
 
