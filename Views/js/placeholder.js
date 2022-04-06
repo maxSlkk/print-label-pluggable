@@ -134,7 +134,7 @@ define(function (require) {
     var isSpanAdded = false;
 
     var callback = function (mutationsList, observer) {
-
+console.log(mutationsList);
         if (!isSpanAdded) {
             var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
             if (rmaDiv) {
