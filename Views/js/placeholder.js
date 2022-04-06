@@ -132,7 +132,7 @@ define(function (require) {
     var isRefundSumSet = false;
 
     var callback = function (mutationsList, observer) {
-        if (mutationsList.length == 2 && mutationsList[0].target.id === "custom-invalidity-text") {
+        if (mutationsList[0].target.id === "custom-invalidity-text") {
             return;
         }
 
