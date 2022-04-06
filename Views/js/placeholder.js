@@ -301,7 +301,7 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
-            console.lof("before call");
+            console.log("before call");
             addInvalidityText("Return category is mandatory field");
             return;
         }
