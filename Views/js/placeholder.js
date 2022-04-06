@@ -135,27 +135,29 @@ define(function (require) {
 
     var callback = function (mutationsList, observer) {
 
-        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
-        if (rmaDiv && !isSpanAdded) {
-            var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
-            if (divWithSpan) {
-                for (var span of rmaDiv.getElementsByTagName("span")) {
-                    if (span.classList.contains("invalidity")) {
-                        span.remove();
-                        break;
+        if (!isSpanAdded) {
+            var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
+            if (rmaDiv) {
+                var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
+                if (divWithSpan) {
+                    for (var span of rmaDiv.getElementsByTagName("span")) {
+                        if (span.classList.contains("invalidity")) {
+                            span.remove();
+                            break;
+                        }
                     }
+    
+                    var tagSpan = document.createElement("span");
+                    var tagI = document.createElement("i");
+                    tagI.setAttribute("id", "custom-invalidity-text");
+    
+                    //var text = document.createTextNode("Return category is mandatory field");
+                    //tag.appendChild(text);
+                    tagSpan.appendChild(tagI);
+                    divWithSpan.insertBefore(tagSpan, divWithSpan.firstChild);
+    console.log("created");
+                    isSpanAdded = true;
                 }
-
-                var tagSpan = document.createElement("span");
-                var tagI = document.createElement("i");
-                tagI.setAttribute("id", "custom-invalidity-text");
-
-                //var text = document.createTextNode("Return category is mandatory field");
-                //tag.appendChild(text);
-                tagSpan.appendChild(tagI);
-                divWithSpan.insertBefore(tagSpan, divWithSpan.firstChild);
-
-                isSpanAdded = true;
             }
         }
 
@@ -299,7 +301,8 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
-            //addInvalidityText("Return category is mandatory field");
+            console.lof("before call");
+            addInvalidityText("Return category is mandatory field");
             return;
         }
         else {
@@ -317,11 +320,11 @@ define(function (require) {
     }
 
     function addInvalidityText(text) {
+        console.log(`text: ${text}`);
         let iTag = document.getElementById("custom-invalidity-text");
         console.log('itag');
         console.log(iTag);
         if (iTag) {
-            console.log(`text: ${text}`);
             var textNode = document.createTextNode(text);
             iTag.innerHTML = "";
             iTag.appendChild(textNode);
