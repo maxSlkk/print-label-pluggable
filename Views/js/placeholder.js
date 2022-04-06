@@ -318,8 +318,10 @@ define(function (require) {
 
     function addInvalidityText(text) {
         let iTag = document.getElementById("custom-invalidity-text");
-
+        console.log('itag');
+        console.log(iTag);
         if (iTag) {
+            console.log(`text: ${text}`);
             var textNode = document.createTextNode(text);
             iTag.innerHTML = "";
             iTag.appendChild(textNode);
