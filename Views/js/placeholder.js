@@ -274,7 +274,7 @@ define(function (require) {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
             console.log("select invalid");
-            addTextToSpan();
+            //addTextToSpan();
             return;
         }
         else {
