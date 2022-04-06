@@ -131,35 +131,30 @@ define(function (require) {
     var refundSum = 0.0;
     var isRefundSumSet = false;
 
-    var isSpanAdded = false;
-
     var callback = function (mutationsList, observer) {
         if (mutationsList.length == 2 && mutationsList[0].target.id === "custom-invalidity-text") {
             return;
         }
-        
-        if (!isSpanAdded) {
-            var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
-            if (rmaDiv) {
-                var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
-                if (divWithSpan) {
-                    for (var span of rmaDiv.getElementsByTagName("span")) {
-                        if (span.classList.contains("invalidity")) {
-                            span.remove();
-                            break;
-                        }
+
+        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
+        if (rmaDiv) {
+            var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
+            if (divWithSpan) {
+                let isRemoved = false;
+                for (var span of rmaDiv.getElementsByTagName("span")) {
+                    if (span.classList.contains("invalidity")) {
+                        span.remove();
+                        isRemoved = true;
+                        break;
                     }
-    
+                }
+                if (isRemoved) {
                     var tagSpan = document.createElement("span");
                     var tagI = document.createElement("i");
                     tagI.setAttribute("id", "custom-invalidity-text");
     
-                    //var text = document.createTextNode("Return category is mandatory field");
-                    //tag.appendChild(text);
                     tagSpan.appendChild(tagI);
                     divWithSpan.insertBefore(tagSpan, divWithSpan.firstChild);
-    console.log("created");
-                    isSpanAdded = true;
                 }
             }
         }
@@ -304,34 +299,25 @@ define(function (require) {
         if (select_returnForm.value === "?") {
             btn.disabled = true;
             select_returnForm.classList.add("selectInvalid");
-            console.log("before call");
-            addInvalidityText("Return category is mandatory field");
+            addInvalidityText("Reason category is mandatory field");
             return;
         }
         else {
             select_returnForm.classList.remove("selectInvalid");
-            //addInvalidityText("");
+            addInvalidityText("");
         }
 
         if (!isNum(input_returnForm.value) || parseInt(input_returnForm.value) <= 0 
             || parseInt(input_returnForm.value) != allowedQuantity) {
             btn.disabled = true;
+            addInvalidityText("Return quantity must be equal to ordered quantity");
             return;
+        }
+        else {
+            addInvalidityText("");
         }
 
         btn.disabled = false;
-    }
-
-    function addInvalidityText(text) {
-        console.log(`text: ${text}`);
-        let iTag = document.getElementById("custom-invalidity-text");
-        console.log('itag');
-        console.log(iTag);
-        if (iTag) {
-            var textNode = document.createTextNode(text);
-            iTag.innerHTML = "";
-            iTag.appendChild(textNode);
-        }
     }
 
     function isResendFormValid() {
@@ -348,19 +334,34 @@ define(function (require) {
         if (select_resendForm.value === "?") {
             btn.disabled = true;
             select_resendForm.classList.add("selectInvalid");
+            addInvalidityText("Reason category is mandatory field");
             return;
         }
         else {
             select_resendForm.classList.remove("selectInvalid");
+            addInvalidityText("");
         }
 
         if (!isNum(input_resendForm.value) || parseInt(input_resendForm.value) <= 0 
             || parseInt(input_resendForm.value) > allowedQuantity) {
             btn.disabled = true;
+            addInvalidityText("Resend quantity must be equal to ordered quantity");
             return;
+        }
+        else {
+            addInvalidityText("");
         }
 
         btn.disabled = false;
+    }
+
+    function addInvalidityText(text) {
+        let iTag = document.getElementById("custom-invalidity-text");
+        if (iTag) {
+            var textNode = document.createTextNode(text);
+            iTag.innerHTML = "";
+            iTag.appendChild(textNode);
+        }
     }
 
     function isNum (str) {
