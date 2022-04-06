@@ -130,8 +130,30 @@ define(function (require) {
     var isAllowedQuantitySet = false;
     var refundSum = 0.0;
     var isRefundSumSet = false;
+    var isSpanAdded = false;
 
     var callback = function (mutationsList, observer) {
+
+        var rmaDiv = document.getElementsByClassName("RMA_AddView")[0];
+        if (rmaDiv && !isSpanAdded) {
+            var divWithSpan = rmaDiv.getElementsByClassName("forced-relative")[0];
+            if (divWithSpan) {
+                console.log(divWithSpan);
+                for (var span of rmaDiv.getElementsByTagName("span")) {
+                    if (span.classList.contains("invalidity")) {
+                        console.log('removing span');
+                        console.log(span);
+                        span.remove();
+                        break;
+                    }
+                }
+                isSpanAdded = true;
+                var tag = document.createElement("span");
+                var text = document.createTextNode("Return category is mandatory field");
+                tag.appendChild(text);
+                divWithSpan.appendChild(tag);
+            }
+        }
 
         var returnForm = document.getElementsByName("submissionForm.Return")[0];
         if (returnForm) {
