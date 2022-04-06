@@ -150,6 +150,7 @@ define(function (require) {
                 }
                 if (isRemoved) {
                     var tagSpan = document.createElement("span");
+                    tagSpan.style.cssText = 'float:left;color:red;';
                     var tagI = document.createElement("i");
                     tagI.setAttribute("id", "custom-invalidity-text");
     
