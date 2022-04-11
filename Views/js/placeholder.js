@@ -429,7 +429,7 @@ define(function (require) {
 
     var callback = function (mutationsList, observer) {
 
-        if (userPermissions.some(x => x.fieldName === 'input_additionalCost')) {
+        if (permissions.some(x => x.fieldName === 'input_additionalCost')) {
             var resendForm = document.getElementsByName("submissionForm.Resend")[0];
             if (resendForm) {
                 var inputs = resendForm.getElementsByTagName("input");
@@ -444,7 +444,7 @@ define(function (require) {
             }
         }
 
-        if (userPermissions.some(x => x.fieldName === 'advancedPermissions')) {
+        if (permissions.some(x => x.fieldName === 'advancedPermissions')) {
             var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
             if (appsContainer) {
                 var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
@@ -462,7 +462,7 @@ define(function (require) {
             }
         }
 
-        if (userPermissions.some(x => x.fieldName === 'cs_app')) {
+        if (permissions.some(x => x.fieldName === 'cs_app')) {
             var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
             if (appsContainer) {
                 var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
@@ -480,7 +480,7 @@ define(function (require) {
             }
         }
 
-        if (userPermissions.some(x => x.fieldName === 'rma_app')) {
+        if (permissions.some(x => x.fieldName === 'rma_app')) {
             var appsContainer = document.getElementsByClassName("cdk-overlay-container")[0];
             if (appsContainer) {
                 var moduleContainers = appsContainer.getElementsByClassName("moduleContainer");
@@ -498,7 +498,7 @@ define(function (require) {
             }
         }
 
-      if (userPermissions.some(x => x.fieldName === 'custom_refund_bundle')) {
+      if (permissions.some(x => x.fieldName === 'custom_refund_bundle')) {
         
         if (mutationsList[0].target.id === "custom-invalidity-text") {
             return;
@@ -763,13 +763,19 @@ define(function (require) {
     const access_token = window.localStorage.getItem("access_token");
 
     const groups = JSON.parse(getGroups(access_token));
-    console.log(groups);
+
+    let userGroupName = '';
+
     for (const group of groups) {
         const groupUsers = JSON.parse(getGroupUsers(group.GroupId, access_token));
-        console.log(groupUsers);
+        if (groupUsers.map(x => x.UserId).includes(session.sessionUserId)) {
+            console.log(group.GroupName);
+            userGroupName = group.GroupName;
+            break;
+        }
     }
 
-    const userPermissions = JSON.parse(getUserPermissions(session.userName, session.token));
+    const permissions = JSON.parse(getPermissions(userGroupName, session.token));
 
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
@@ -795,7 +801,7 @@ define(function (require) {
     return xmlHttp.responseText;
   }
 
-  function getUserPermissions(groupName, token)
+  function getPermissions(groupName, token)
   {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getGroupConfiguration?groupName="+groupName, false);
