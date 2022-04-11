@@ -760,7 +760,7 @@ define(function (require) {
     const observer = new MutationObserver(callback);
 
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
-    const access_token = JSON.parse(window.localStorage.getItem("access_token"));
+    const access_token = window.localStorage.getItem("access_token");
 
     const groups = JSON.parse(getGroups(access_token));
     console.log(groups);
