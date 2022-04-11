@@ -775,7 +775,7 @@ define(function (require) {
     }
 
     const permissions = JSON.parse(getPermissions(userGroupName, session.token));
-console.log(permissions);
+
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
       observer.observe(targetNode, config);
