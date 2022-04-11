@@ -765,7 +765,7 @@ define(function (require) {
     const groups = JSON.parse(getGroups(access_token));
     console.log(groups);
     for (const group of groups) {
-        const groupUsers = JSON.parse(getGroupUsers(group.groupId, access_token));
+        const groupUsers = JSON.parse(getGroupUsers(group.GroupId, access_token));
         console.log(groupUsers);
     }
 
