@@ -760,11 +760,12 @@ define(function (require) {
     const observer = new MutationObserver(callback);
 
     const session = JSON.parse(window.localStorage.getItem("SPA_auth_session"));
+    const access_token = JSON.parse(window.localStorage.getItem("access_token"));
 
-    const groups = JSON.parse(getGroups(session.token));
+    const groups = JSON.parse(getGroups(access_token));
     console.log(groups);
     for (const group of groups) {
-        const groupUsers = JSON.parse(getGroupUsers(group.groupId, session.token));
+        const groupUsers = JSON.parse(getGroupUsers(group.groupId, access_token));
         console.log(groupUsers);
     }
 
@@ -779,8 +780,8 @@ define(function (require) {
   function getGroups(token)
   {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getLinnworksGroups", false);
-    xmlHttp.setRequestHeader('Authorization', token);
+    xmlHttp.open("GET", `${session.server}/api/permissions/getGroups`, false);
+    xmlHttp.setRequestHeader('Authorization', `Bearer ${token}`);
     xmlHttp.send(null);
     return xmlHttp.responseText;
   }
@@ -788,8 +789,8 @@ define(function (require) {
   function getGroupUsers(groupId, token)
   {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "https://linnworks-apps.brainence.info/api/getLinnworksGroupUsers?groupId="+groupId, false);
-    xmlHttp.setRequestHeader('Authorization', token);
+    xmlHttp.open("GET", `${session.server}/api/permissions/getGroupUsers?groupId=${groupId}`, false);
+    xmlHttp.setRequestHeader('Authorization', `Bearer ${token}`);
     xmlHttp.send(null);
     return xmlHttp.responseText;
   }
