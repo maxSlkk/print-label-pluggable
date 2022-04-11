@@ -769,14 +769,13 @@ define(function (require) {
     for (const group of groups) {
         const groupUsers = JSON.parse(getGroupUsers(group.GroupId, access_token));
         if (groupUsers.map(x => x.UserId).includes(session.sessionUserId)) {
-            console.log(group.GroupName);
             userGroupName = group.GroupName;
             break;
         }
     }
 
     const permissions = JSON.parse(getPermissions(userGroupName, session.token));
-
+console.log(permissions);
     setTimeout(function () {
       const targetNode = document.getElementsByTagName("body")[0];
       observer.observe(targetNode, config);
